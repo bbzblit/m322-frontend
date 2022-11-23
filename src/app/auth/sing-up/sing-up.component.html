@@ -1,0 +1,7 @@
+<form [formGroup]="singUpForm" (ngSubmit)="register()">
+    <input formControlName="username" type="text" id="username" name="username" placeholder="Username"><br><br>
+    <input formControlName="email" type="email" id="email" name="email" placeholder="Your Email"><br><br>
+    <input formControlName="password" type="password" id="password" name="password" placeholder="Password"><br><br>
+    <input type="retype-password" id="lname" name="lname" placeholder="Retype Password"><br><br>
+    <input [disabled]="!singUpForm.valid" type="submit" value="Submit">
+</form>
