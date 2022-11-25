@@ -11,7 +11,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { appUserReducer } from './state/appuser.reducer';
 import { AppUserEffect } from './state/appuser.effect';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatInputModule,  } from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -23,13 +31,20 @@ import { AppUserEffect } from './state/appuser.effect';
     BrowserModule,
     AppRoutingModule,
     BrowserModule,
+    NgbModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({appUser : appUserReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AppUserEffect])
-  ],
+    EffectsModule.forRoot([AppUserEffect]),
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

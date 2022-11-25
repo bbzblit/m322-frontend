@@ -1,7 +1,51 @@
-<form [formGroup]="singUpForm" (ngSubmit)="register()">
-    <input formControlName="username" type="text" id="username" name="username" placeholder="Username"><br><br>
-    <input formControlName="email" type="email" id="email" name="email" placeholder="Your Email"><br><br>
-    <input formControlName="password" type="password" id="password" name="password" placeholder="Password"><br><br>
-    <input type="retype-password" id="lname" name="lname" placeholder="Retype Password"><br><br>
-    <input [disabled]="!singUpForm.valid" type="submit" value="Submit">
-</form>
+<div id="sing-up-wrapper">
+    <h1 id="sing-up-title">Create new Account</h1>
+    <form class="form" [formGroup]="singUpForm" (ngSubmit)="register()">
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input formControlName="userName" ngDefaultControl matInput placeholder="Your Username">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input formControlName="firstName" ngDefaultControl matInput placeholder="Your First Name">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input formControlName="lastName" ngDefaultControl matInput placeholder="Your Last Name">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" ngDefaultControl type="email" matInput placeholder="Your Email">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" ngDefaultControl [type]="passwordHide ? 'password' : 'text'" matInput
+                placeholder="Your Password">
+            <button class="passwordhide" mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
+                [attr.aria-pressed]="passwordHide">
+                <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Retype Password</mat-label>
+            <input #retypePassword ngDefaultControl [type]="retypePasswrdHide ? 'password' : 'text'" matInput
+                placeholder="Your Password">
+
+            <button class="passwordhide" mat-icon-button matSuffix (click)="retypePasswrdHide = !retypePasswrdHide"
+                [attr.aria-pressed]="retypePasswrdHide">
+                <mat-icon>{{retypePasswrdHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <button [disabled]="!singUpForm.valid || singUpForm.value.password != retypePassword.value" mat-stroked-button
+            color="primary">Register</button>
+    </form>
+</div>

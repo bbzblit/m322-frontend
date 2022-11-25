@@ -13,11 +13,15 @@ export class SingUpComponent implements OnInit {
 
 
   singUpForm = new FormGroup({
-    username: new FormControl("", [Validators.required, Validators.minLength(5)]),
+    userName: new FormControl("", [Validators.required, Validators.minLength(5)]),
+    firstName : new FormControl("", [Validators.required]),
+    lastName : new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required, Validators.minLength(8)]),
   });
 
+  passwordHide : boolean = true;
+  retypePasswrdHide : boolean  = true;
 
   register() {
     this.store.dispatch(register(this.singUpForm.value as AppUser))
