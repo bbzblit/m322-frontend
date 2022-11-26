@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div id="login-wrapper">
+    <h1 id="title">Login</h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field appearance="fill">
+            <mat-label>Username or Email</mat-label>
+            <input formControlName="userNameOrEmail" ngDefaultControl matInput placeholder="Your Username or email">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input [type]="passwordHide ? 'password' : 'text'" formControlName="password" ngDefaultControl matInput
+                placeholder="Your Password">
+            <button class="passwordhide" mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
+                [attr.aria-pressed]="passwordHide">
+                <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <button [disabled]="!loginForm.valid" mat-stroked-button color="primary">Register</button>
+
+    </form>
+</div>

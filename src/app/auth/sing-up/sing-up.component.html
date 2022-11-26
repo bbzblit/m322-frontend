@@ -1,5 +1,5 @@
 <div id="sing-up-wrapper">
-    <h1 id="sing-up-title">Create new Account</h1>
+    <h1 id="title">Create new Account</h1>
     <form class="form" [formGroup]="singUpForm" (ngSubmit)="register()">
 
 
@@ -37,7 +37,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Retype Password</mat-label>
-            <input #retypePassword ngDefaultControl [type]="retypePasswrdHide ? 'password' : 'text'" matInput
+            <input #retypePassword ngDefaultControl required [type]="retypePasswrdHide ? 'password' : 'text'" matInput
                 placeholder="Your Password">
 
             <button class="passwordhide" mat-icon-button matSuffix (click)="retypePasswrdHide = !retypePasswrdHide"
