@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(tryReLogin());
     this.store.select(selectAppUser).subscribe(appUser => {
       if(Object.keys(appUser).length !== 0){window.location.replace("./home");}
-   });  }
+   });  
+  }
 
   login(){
     let _data = this.loginForm.getRawValue() as LoginModel;

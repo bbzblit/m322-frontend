@@ -1,0 +1,28 @@
+#home-table{
+    width: 100%;
+    height: max-content;
+}
+#home-table-wrapper{
+    height: 70%;
+    width: 100%;
+    position: relative;
+}
+
+#home-title{
+    margin-bottom: 2rem;
+    font-size: xx-large;
+}
+
+#home-wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    height: 100%;
+}
+
+#paginator-options{
+    bottom: 0;
+    margin-top: auto;
+    position: absolute;
+    width: 100%;
+}
