@@ -22,6 +22,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { HomeComponent } from './home/home.component';
 import { FolderEffect } from './state/appuser.effec';
 import { folderReducer } from './state/folder.reducer';
+import {MatMenuModule} from '@angular/material/menu';
+import { HomeMenuComponent } from './home/home-menu/home-menu.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { folderReducer } from './state/folder.reducer';
     LoginComponent,
     SingUpComponent,
     HomeComponent,
+    HomeMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { folderReducer } from './state/folder.reducer';
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
+    MatMenuModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
