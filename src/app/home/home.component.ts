@@ -8,7 +8,7 @@ import { Folder } from '../model/folder.model';
 import { AppuserService } from '../service/appuser.service';
 import { register, tryReLogin } from '../state/appuser.action';
 import { selectAppUser } from '../state/appuser.selector';
-import { deletFolder, loadFolders } from '../state/folder.action';
+import { createFolder, deletFolder, loadFolders } from '../state/folder.action';
 import { selectFolder } from '../state/folder.selector';
 import { HomePopupHelperComponent } from './home-popup-helper/home-popup-helper.component';
 
@@ -65,5 +65,21 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(_result => this.deleteRow(_result, index));
+  }
+  
+  createFolder(foldername : string){
+      this.store.dispatch(createFolder({foldername : foldername}));
+    }
+
+  openCreateDialog(){
+    const dialogRef = this.dialog.open(HomePopupHelperComponent, {
+      width: '24rem',
+      height: '17rem',
+      data: {type: 'create'},
+    });
+
+    dialogRef.afterClosed().subscribe(_result => this.createFolder(_result))
+
+    console.log("Creating new folder");
   }
 }

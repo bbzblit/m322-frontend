@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Folder } from '../model/folder.model';
 
 @Injectable({
@@ -15,6 +16,11 @@ export class FolderService {
 
   deleteFolder(folderId : string){
     return this.http.delete<void>("/api/folder/?id=" + folderId);
+  }
+
+  createFolder(foldername : string) : Observable<Folder>{
+    return this.http.post<Folder>("/api/folder", {title : foldername});
+
   }
 
 }

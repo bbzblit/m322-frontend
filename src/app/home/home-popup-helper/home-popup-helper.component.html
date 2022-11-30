@@ -5,7 +5,19 @@
         Would you like to delete the Folder {{data.foldername}} ?
     </div>
     <div mat-dialog-actions>
-        <button  [mat-dialog-close]="false" cdkFocusInitial mat-button mat-dialog-close>No</button>
+        <button [mat-dialog-close]="false" cdkFocusInitial mat-button mat-dialog-close>No</button>
         <button [mat-dialog-close]="true" mat-button mat-dialog-close>Ok</button>
+    </div>
+</div>
+<div *ngIf="data.type === 'create'">
+    <h1 mat-dialog-title>Create new Folder</h1>
+    <p>Give your new Folder a name</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Foldername</mat-label>
+        <input matInput [(ngModel)]="data.folder">
+    </mat-form-field>
+    <div mat-dialog-actions>
+        <button (click)="dialogRef.close()" cdkFocusInitial mat-button mat-dialog-close>No</button>
+        <button [mat-dialog-close]="data.folder" mat-button mat-dialog-close>Ok</button>
     </div>
 </div>

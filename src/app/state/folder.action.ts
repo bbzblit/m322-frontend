@@ -19,3 +19,13 @@ export const deleteFolderSuccess = createAction(
     '[Collection] delete folder by id',
     props<{folderId : string}>()
 )
+
+export const createFolder = createAction(
+    '[API] create Folder',
+    props<{foldername : string}>()
+)
+
+export const createFolderSuccess = createAction(
+    '[Collection] created Folder',
+    props<Folder>()
+)
