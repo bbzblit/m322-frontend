@@ -68,7 +68,8 @@ export class HomeComponent implements OnInit {
   }
   
   createFolder(folder : Folder){
-      this.store.dispatch(createFolder(folder));
+    if(!folder){return;}
+    this.store.dispatch(createFolder(folder));
     }
 
   openCreateDialog(){
@@ -84,6 +85,7 @@ export class HomeComponent implements OnInit {
   }
 
   editFolder(folder : Folder){
+    if(!folder){return;}
     this.store.dispatch(updateFolder(folder));
   }
 

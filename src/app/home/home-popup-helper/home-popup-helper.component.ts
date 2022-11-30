@@ -14,7 +14,7 @@ export class HomePopupHelperComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.data.type === 'create'){
-      this.data.folder = {}
+      this.data.folder = {title : ""}
     }
     if(this.data.type === 'edit'){
       this.data.folder = {... this.data.oldfolder};
