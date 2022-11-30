@@ -8,7 +8,7 @@ import { Folder } from '../model/folder.model';
 import { AppuserService } from '../service/appuser.service';
 import { register, tryReLogin } from '../state/appuser.action';
 import { selectAppUser } from '../state/appuser.selector';
-import { createFolder, deletFolder, loadFolders } from '../state/folder.action';
+import { createFolder, deletFolder, loadFolders, updateFolder } from '../state/folder.action';
 import { selectFolder } from '../state/folder.selector';
 import { HomePopupHelperComponent } from './home-popup-helper/home-popup-helper.component';
 
@@ -81,5 +81,27 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(_result => this.createFolder(_result as Folder))
 
     console.log("Creating new folder");
+  }
+
+  editFolder(folder : Folder){
+    this.store.dispatch(updateFolder(folder));
+  }
+
+  openEditDialog(){
+    const dialogRef = this.dialog.open(HomePopupHelperComponent, {
+      width: '24rem',
+      height: '17rem',
+      data: {type: 'edit', oldfolder : this.folder[this.selectedRow]},
+    });
+    dialogRef.afterClosed().subscribe(_result => this.editFolder(_result as Folder))
+  }
+
+
+  selectRow(index : number){
+
+  }
+
+  loadSubjects(index : number){
+    console.log(index);
   }
 }

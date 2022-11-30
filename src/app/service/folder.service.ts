@@ -23,4 +23,8 @@ export class FolderService {
 
   }
 
+  updateFolder(folder : Folder) : Observable<Folder>{
+    return this.http.put<Folder>("/api/folder", folder);
+  }
+
 }

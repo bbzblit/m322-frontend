@@ -29,3 +29,13 @@ export const createFolderSuccess = createAction(
     '[Collection] created Folder',
     props<Folder>()
 )
+
+export const updateFolder = createAction(
+    '[API] updating Folder',
+    props<Folder>()
+)
+
+export const updateFolderSuccess = createAction(
+    '[Collection] update Folder success',
+    props<Folder>()
+)

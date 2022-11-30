@@ -13,7 +13,12 @@ export class HomePopupHelperComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    this.data.folder = {}
+    if(this.data.type === 'create'){
+      this.data.folder = {}
+    }
+    if(this.data.type === 'edit'){
+      this.data.folder = {... this.data.oldfolder};
+    }
   }
 
 }

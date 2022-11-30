@@ -21,3 +21,16 @@
         <button [mat-dialog-close]="data.folder" mat-button mat-dialog-close>Ok</button>
     </div>
 </div>
+
+<div *ngIf="data.type === 'edit'">
+    <h1 mat-dialog-title>Edit Folder</h1>
+    <p>Editing Folder {{data.folder.title}}</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Foldername</mat-label>
+        <input matInput [(ngModel)]="data.folder.title">
+    </mat-form-field>
+    <div mat-dialog-actions>
+        <button (click)="dialogRef.close()" cdkFocusInitial mat-button mat-dialog-close>No</button>
+        <button [mat-dialog-close]="data.folder" mat-button mat-dialog-close>Ok</button>
+    </div>
+</div>
