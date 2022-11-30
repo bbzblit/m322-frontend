@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<mat-toolbar id="mat-header" class="primary">
+    <h1 id="app-title">M322</h1>
+    <app-logout id="logout"></app-logout>
+</mat-toolbar>
+
+<main>
+
+    <router-outlet></router-outlet>
+</main>
+<footer class="primary" id="right">
+    <div class="footer-wrapper">
+        <a href="./support-us">Support us</a>
+    </div>
+    <div id="left" class="footer-wrapper">
+        <a href="./privacy">Privacy</a>
+        <a href="./contact-us">Contact us</a>
+    </div>
+</footer>

@@ -4,7 +4,7 @@ import { catchError, map, switchMap } from "rxjs";
 import { AppUser } from "../model/appuser.model";
 import { LoginModel } from "../model/login.model";
 import { AppuserService } from "../service/appuser.service";
-import { login, loginSuccess, register, registerSuccess, tryReLogin } from "./appuser.action";
+import { login, loginSuccess, logout, logoutSuccess, register, registerSuccess, tryReLogin } from "./appuser.action";
 
 @Injectable()
 export class AppUserEffect {
@@ -34,6 +34,15 @@ export class AppUserEffect {
     switchMap(() =>
       this.appUserService.tryReLogin().pipe(
         map((registertUser: AppUser) => loginSuccess(registertUser)),
+        //catchError(error => console.log(error))) //TODO: Replace with exeption handeling
+      )
+    )
+  ))
+  logout$ = createEffect( () => this.actions$.pipe(
+    ofType(logout),
+    switchMap(() =>
+      this.appUserService.logout().pipe(
+        map(() => logoutSuccess()),
         //catchError(error => console.log(error))) //TODO: Replace with exeption handeling
       )
     )

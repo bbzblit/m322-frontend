@@ -26,6 +26,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { HomeMenuComponent } from './home/home-menu/home-menu.component';
 import { HomePopupHelperComponent } from './home/home-popup-helper/home-popup-helper.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { LogoutComponent } from './auth/logout/logout.component';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     HomeComponent,
     HomeMenuComponent,
     HomePopupHelperComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatPaginatorModule,
     MatMenuModule,
     MatDialogModule,
+    MatToolbarModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

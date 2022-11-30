@@ -31,11 +31,11 @@ $accent: map-get($app-theme, accent);
 }
 
 
-html, body{
+html, body,app-root{
     height: 100%;
     min-height: 100%;
 }
-body{
+app-root{
     display: grid;
     grid-template-areas: "header" "main" "footer";
     grid-template-rows:  4.5rem auto 4rem;
@@ -43,10 +43,7 @@ body{
 }
 
 main{
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     grid-area: main;
     height: 100%;
 }

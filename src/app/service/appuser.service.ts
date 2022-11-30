@@ -24,4 +24,8 @@ export class AppuserService {
   tryReLogin() : Observable<AppUser>{
     return this.http.get<AppUser>("/api/appuser/relogin");
   }
+
+  logout(){
+    return this.http.get("/api/appuser/logout");
+  }
 }

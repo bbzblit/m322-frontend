@@ -29,3 +29,11 @@ export const clearAppUserCach = createAction(
 export const tryReLogin = createAction(
   "[API] trying to relogin"
 )
+
+export const logout = createAction(
+  '[API] login out'
+)
+
+export const logoutSuccess = createAction(
+  '[Collection] logout success'
+)
