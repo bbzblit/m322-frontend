@@ -1,5 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import {MatDialog , MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { FolderEffect } from 'src/app/state/folder.effec';
 
 @Component({
   selector: 'app-home-popup-helper',
@@ -12,6 +13,7 @@ export class HomePopupHelperComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    this.data.folder = {}
   }
 
 }

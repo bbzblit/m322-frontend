@@ -35,8 +35,8 @@ export class FolderEffect {
 
     createFolder$ = createEffect(() => this.actions$.pipe(
         ofType(createFolder),
-        switchMap(({foldername}) =>
-            this.folderService.createFolder(foldername).pipe(
+        switchMap((folder) =>
+            this.folderService.createFolder(folder).pipe(
                 map((folder) =>  createFolderSuccess(folder)),
                 //catchError(error => console.log(error))) //TODO: Replace with exeption handeling
             )

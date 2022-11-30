@@ -2,10 +2,10 @@ import { AppUser } from "./appuser.model";
 import { Subject } from "./subject.model";
 
 export interface Folder{
-    id: string,
+    id?: string,
     title : string,
-    owner : AppUser,
-    viewAccess : Array<AppUser>,
-    writeAccess : Array<AppUser>,
-    subjects : Array<Subject>,
+    owner? : AppUser,
+    viewAccess? : Array<AppUser>,
+    writeAccess? : Array<AppUser>,
+    subjects? : Array<Subject>,
 }

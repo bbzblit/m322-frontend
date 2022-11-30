@@ -14,7 +14,7 @@
     <p>Give your new Folder a name</p>
     <mat-form-field appearance="fill">
         <mat-label>Foldername</mat-label>
-        <input matInput [(ngModel)]="data.folder">
+        <input matInput [(ngModel)]="data.folder.title">
     </mat-form-field>
     <div mat-dialog-actions>
         <button (click)="dialogRef.close()" cdkFocusInitial mat-button mat-dialog-close>No</button>

@@ -18,8 +18,8 @@ export class FolderService {
     return this.http.delete<void>("/api/folder/?id=" + folderId);
   }
 
-  createFolder(foldername : string) : Observable<Folder>{
-    return this.http.post<Folder>("/api/folder", {title : foldername});
+  createFolder(folder : Folder) : Observable<Folder>{
+    return this.http.post<Folder>("/api/folder", folder);
 
   }
 

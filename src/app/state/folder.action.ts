@@ -22,7 +22,7 @@ export const deleteFolderSuccess = createAction(
 
 export const createFolder = createAction(
     '[API] create Folder',
-    props<{foldername : string}>()
+    props<Folder>()
 )
 
 export const createFolderSuccess = createAction(

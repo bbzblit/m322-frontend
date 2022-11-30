@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
 
   deleteRow(confirm : boolean, index : number){
     if(confirm){
-      this.store.dispatch(deletFolder({folderId : this.folder[index].id}))
+      this.store.dispatch(deletFolder({folderId : this.folder[index].id!}))
     }
   }
 
@@ -67,8 +67,8 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(_result => this.deleteRow(_result, index));
   }
   
-  createFolder(foldername : string){
-      this.store.dispatch(createFolder({foldername : foldername}));
+  createFolder(folder : Folder){
+      this.store.dispatch(createFolder(folder));
     }
 
   openCreateDialog(){
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
       data: {type: 'create'},
     });
 
-    dialogRef.afterClosed().subscribe(_result => this.createFolder(_result))
+    dialogRef.afterClosed().subscribe(_result => this.createFolder(_result as Folder))
 
     console.log("Creating new folder");
   }
