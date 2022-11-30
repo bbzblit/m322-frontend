@@ -36,7 +36,7 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row (contextmenu)="openContextMenu($event, i)"
+        <tr mat-row [style.background-color]="i === selectedRow ? 'rgb(237, 246, 246)' : null" (contextmenu)="openContextMenu($event, i)"
           *matRowDef="let row;let i = index; columns: displayedColumns;" (click)="select(i)" class="home-table-row">
         </tr>
       </table>
@@ -47,5 +47,5 @@
     </mat-paginator>
   </div>
 </div>
-<app-home-menu (close)="selectedRow = -1" [selectedFolder]="selectedRow >= 0" [open]="eventsSubject" id="home-menu"
+<app-home-menu (delete)="openDeleteDialog(selectedRow)" (close)="selectedRow = -1" [selectedFolder]="selectedRow >= 0" [open]="eventsSubject" id="home-menu"
   [style.top]="menuPosition.y + 'px'" [style.left]="menuPosition.x + 'px'" style="position: absolute;"></app-home-menu>

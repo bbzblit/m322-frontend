@@ -13,6 +13,11 @@ export class HomeMenuComponent implements OnInit {
   @Input("open") open!: Observable<void>;
   
   @Output("close") closeEvent: EventEmitter<void> = new EventEmitter<void>();
+
+  @Output("create") create : EventEmitter<void> = new EventEmitter<void>();
+  @Output("delete") deleteFolder : EventEmitter<void> = new EventEmitter<void>();
+  @Output("edit") edit : EventEmitter<void> = new EventEmitter<void>();
+
   @ViewChild('menuTrigger') menuTrigger!: MatMenuTrigger;
 
 

@@ -6,7 +6,7 @@ import { Folder } from "../model/folder.model";
 import { AppuserService } from "../service/appuser.service";
 import { FolderService } from "../service/folder.service";
 import { registerSuccess } from "./appuser.action";
-import { loadFolders, loadFolderSuccess } from "./folder.action";
+import { deleteFolderSuccess, deletFolder, loadFolders, loadFolderSuccess } from "./folder.action";
 
 @Injectable()
 export class FolderEffect {
@@ -18,6 +18,16 @@ export class FolderEffect {
         switchMap(() =>
             this.folderService.loadAllFolder().pipe(
                 map((folders: Array<Folder>) => loadFolderSuccess({folders : folders })),
+                //catchError(error => console.log(error))) //TODO: Replace with exeption handeling
+            )
+        )
+    ))
+
+    deletFolder$ = createEffect(() => this.actions$.pipe(
+        ofType(deletFolder),
+        switchMap(({folderId}) =>
+            this.folderService.deleteFolder(folderId).pipe(
+                map(() => deleteFolderSuccess({folderId : folderId })),
                 //catchError(error => console.log(error))) //TODO: Replace with exeption handeling
             )
         )

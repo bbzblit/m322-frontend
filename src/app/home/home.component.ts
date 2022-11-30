@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
@@ -7,8 +8,9 @@ import { Folder } from '../model/folder.model';
 import { AppuserService } from '../service/appuser.service';
 import { register, tryReLogin } from '../state/appuser.action';
 import { selectAppUser } from '../state/appuser.selector';
-import { loadFolders } from '../state/folder.action';
+import { deletFolder, loadFolders } from '../state/folder.action';
 import { selectFolder } from '../state/folder.selector';
+import { HomePopupHelperComponent } from './home-popup-helper/home-popup-helper.component';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +26,7 @@ export class HomeComponent implements OnInit {
   public menuPosition =  {x: 0, y: 0}; 
   public eventsSubject: Subject<void> = new Subject<void>();
   
-  constructor(private store : Store) { }
+  constructor(private store : Store, public dialog: MatDialog) { }
 
 
 
@@ -47,5 +49,21 @@ export class HomeComponent implements OnInit {
     this.eventsSubject.next();
     this.menuPosition.x = event.clientX;
     this.menuPosition.y = event.clientY;
+  }
+
+  deleteRow(confirm : boolean, index : number){
+    if(confirm){
+      this.store.dispatch(deletFolder({folderId : this.folder[index].id}))
+    }
+  }
+
+  openDeleteDialog(index : number){
+    const dialogRef = this.dialog.open(HomePopupHelperComponent, {
+      width: '30rem',
+      height: '10rem',
+      data: {type: 'delete', foldername: this.folder[this.selectedRow].title},
+    });
+
+    dialogRef.afterClosed().subscribe(_result => this.deleteRow(_result, index));
   }
 }

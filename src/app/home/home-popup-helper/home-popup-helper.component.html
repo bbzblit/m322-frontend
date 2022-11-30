@@ -1,0 +1,11 @@
+<!--Delete Popup-->
+<div *ngIf="data.type === 'delete'">
+    <h1 mat-dialog-title>Delete Folder</h1>
+    <div id="text-wrapper" mat-dialog-content>
+        Would you like to delete the Folder {{data.foldername}} ?
+    </div>
+    <div mat-dialog-actions>
+        <button  [mat-dialog-close]="false" cdkFocusInitial mat-button mat-dialog-close>No</button>
+        <button [mat-dialog-close]="true" mat-button mat-dialog-close>Ok</button>
+    </div>
+</div>

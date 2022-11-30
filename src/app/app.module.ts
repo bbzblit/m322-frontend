@@ -20,10 +20,12 @@ import { MatInputModule,  } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { HomeComponent } from './home/home.component';
-import { FolderEffect } from './state/appuser.effec';
+import { FolderEffect } from './state/folder.effec';
 import { folderReducer } from './state/folder.reducer';
 import {MatMenuModule} from '@angular/material/menu';
 import { HomeMenuComponent } from './home/home-menu/home-menu.component';
+import { HomePopupHelperComponent } from './home/home-popup-helper/home-popup-helper.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { HomeMenuComponent } from './home/home-menu/home-menu.component';
     SingUpComponent,
     HomeComponent,
     HomeMenuComponent,
+    HomePopupHelperComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { HomeMenuComponent } from './home/home-menu/home-menu.component';
     MatTableModule,
     MatPaginatorModule,
     MatMenuModule,
+    MatDialogModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

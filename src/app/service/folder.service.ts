@@ -13,4 +13,8 @@ export class FolderService {
     return this.http.get<Array<Folder>>("/api/folder");
   }
 
+  deleteFolder(folderId : string){
+    return this.http.delete<void>("/api/folder/?id=" + folderId);
+  }
+
 }
