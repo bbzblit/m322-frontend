@@ -1,0 +1,19 @@
+<div id="editing-wrapper">
+    <h1>Editing {{folder.title}}</h1>
+    <div class="mat-elevation-z8" id="form-wrapper" style="height: 70%; position: relative; display: flex; flex-direction: column;">
+        <table  class="grades-table" mat-table [dataSource]="folder.subjects!" >
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div id="context-clicker" style="height: 100%;" (contextmenu)="openMenu($event, -1)"></div>
+        <mat-paginator id="paginator-options" pageSize="15" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+</div>
+<app-grades-menu (createSubject)="openCreateDialog()" [open]="openEvent" [style.top]="menuPosition.y + 'px'" [style.left]="menuPosition.x + 'px'" style="position: absolute;"></app-grades-menu>

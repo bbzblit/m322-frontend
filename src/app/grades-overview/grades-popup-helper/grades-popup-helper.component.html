@@ -1,0 +1,12 @@
+<div *ngIf="data.type === 'create'">
+    <h1 mat-dialog-title>Create new Folder</h1>
+    <p>Give your new Subject a name</p>
+    <mat-form-field  appearance="fill">
+        <mat-label>Subjectname</mat-label>
+        <input required matInput [(ngModel)]="data.subject.name">
+    </mat-form-field>
+    <div mat-dialog-actions class="mat-dialog-actions">
+        <button (click)="dialogRef.close()"  class="resset-button" cdkFocusInitial mat-button mat-dialog-close>No</button>
+        <button [disabled]="data.subject.name.length === 0" [mat-dialog-close]="data.subject" mat-button mat-dialog-close>Ok</button>
+    </div>
+</div>

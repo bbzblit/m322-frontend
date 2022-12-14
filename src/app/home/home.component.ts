@@ -98,12 +98,8 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(_result => this.editFolder(_result as Folder))
   }
 
-
-  selectRow(index : number){
-
-  }
-
   loadSubjects(index : number){
-    console.log(index);
+    let _folder = this.folder[index]
+    window.location.replace("./edit/" + _folder.id);
   }
 }

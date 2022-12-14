@@ -19,8 +19,7 @@ export class LogoutComponent implements OnInit {
     this.store.select(selectAppUser).subscribe(me => this.isLogedIn = Object.keys(me).length !== 0);
   }
 
-  initLogoutFlow(){
+  async initLogoutFlow(){
     this.store.dispatch(logout());
-    window.location.replace("./login");
   }
 }

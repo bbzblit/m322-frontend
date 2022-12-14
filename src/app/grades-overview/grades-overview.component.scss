@@ -1,0 +1,14 @@
+#editing-wrapper{
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#grades-table{
+    width: 100%;
+    height: max-content;
+    z-index: 1000;
+}
+#context-clicker{
+    height: 100%;
+}

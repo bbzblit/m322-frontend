@@ -27,7 +27,10 @@ import { HomeMenuComponent } from './home/home-menu/home-menu.component';
 import { HomePopupHelperComponent } from './home/home-popup-helper/home-popup-helper.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { LogoutComponent } from './auth/logout/logout.component';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { GradesOverviewComponent } from './grades-overview/grades-overview.component';
+import { GradesMenuComponent } from './grades-overview/grades-menu/grades-menu.component';
+import { GradesPopupHelperComponent } from './grades-overview/grades-popup-helper/grades-popup-helper.component'; 
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     HomeMenuComponent,
     HomePopupHelperComponent,
     LogoutComponent,
+    GradesOverviewComponent,
+    GradesMenuComponent,
+    GradesPopupHelperComponent,
   ],
   imports: [
     BrowserModule,

@@ -26,6 +26,8 @@ export class AppuserService {
   }
 
   logout(){
-    return this.http.get("/api/appuser/logout");
+    let _req = this.http.get("/api/appuser/logout");
+    window.location.replace("./login");
+    return _req;
   }
 }
