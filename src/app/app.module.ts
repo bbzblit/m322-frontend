@@ -29,7 +29,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { LogoutComponent } from './auth/logout/logout.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { GradesOverviewComponent } from './grades-overview/grades-overview.component';
-import { GradesPopupHelperComponent } from './grades-overview/grades-popup-helper/grades-popup-helper.component'; 
+import { GradesPopupHelperComponent } from './grades-overview/grades-popup-helper/grades-popup-helper.component';
+import { GradeComponent } from './grades-overview/grade/grade.component'; 
+import { GradesMenuComponent } from './grades-overview/grade-menu/grade-menu.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { GradesPopupHelperComponent } from './grades-overview/grades-popup-helpe
     LogoutComponent,
     GradesOverviewComponent,
     GradesPopupHelperComponent,
+    GradeComponent,
+    GradesMenuComponent,
   ],
   imports: [
     BrowserModule,

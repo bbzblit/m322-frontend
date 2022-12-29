@@ -20,7 +20,7 @@ export class GradesOverviewComponent implements OnInit {
 
   public folderId: string = "";
   public folder: Folder = { title: "", subjects: [] };
-  public displayedColumns: Array<string> = ['name', 'actions'];
+  public displayedColumns: Array<string> = ['name','grades', 'actions'];
   public openEvent: Subject<void> = new Subject<void>();
   public selectedSubject: number = -1;
   public menuPosition = { x: 0, y: 0 };
