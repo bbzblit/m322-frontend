@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
   public me! : AppUser;
   public folder! : Array<Folder>;
-  public displayedColumns: string[] = ['title', 'owner', 'viewAccess', 'writeAccess'];
+  public displayedColumns: string[] = ['title', 'owner', 'viewAccess', 'writeAccess', 'actions'];
   public selectedRow : number = -1;
   public menuPosition =  {x: 0, y: 0}; 
   public eventsSubject: Subject<void> = new Subject<void>();

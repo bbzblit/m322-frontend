@@ -5,18 +5,24 @@
       <table id="home-table" mat-table [dataSource]="folder">
 
         <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef class="home-table-head"> Title </th>
+          <th mat-header-cell *matHeaderCellDef class="home-table-head">
+            <p class="global-table-title"> Title </p>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.title}} </td>
         </ng-container>
 
 
         <ng-container matColumnDef="owner">
-          <th mat-header-cell *matHeaderCellDef class="home-table-head"> Owner </th>
+          <th mat-header-cell *matHeaderCellDef class="home-table-head">
+            <p class="global-table-title"> Owner </p>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.owner.userName + ' (' + element.owner.email + ')'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="viewAccess">
-          <th mat-header-cell *matHeaderCellDef class="home-table-head"> View Access </th>
+          <th mat-header-cell *matHeaderCellDef class="home-table-head">
+            <p class="global-table-title"> View Access</p>
+          </th>
           <td mat-cell *matCellDef="let element">
             <div class="access-wrapper">
               <p *ngIf="!element.writeAccess" class="home-alt-text">Nicht freigegeben</p>
@@ -26,7 +32,9 @@
         </ng-container>
 
         <ng-container matColumnDef="writeAccess">
-          <th mat-header-cell *matHeaderCellDef class="home-table-head">Write Access </th>
+          <th mat-header-cell *matHeaderCellDef class="home-table-head">
+            <p class="global-table-title">Write Access </p>
+          </th>
           <td mat-cell *matCellDef="let element">
             <div class="access-wrapper">
               <p *ngIf="!element.writeAccess" class="home-alt-text">Nicht freigegeben</p>
@@ -34,12 +42,30 @@
             </div>
           </td>
         </ng-container>
+        <!--Static actions-->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="home-table-head">
+            <p class="global-table-title"> Action</p>
+          </th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <div class="action-wrapper">
+              <button class="action-button"
+                (click)="selectedRow = i;openEditDialog()"><mat-icon>edit</mat-icon></button>
+              <button class="action-button"
+                (click)="selectedRow = i;openDeleteDialog(i)"><mat-icon>delete</mat-icon></button>
+            </div>
+          </td>
+        </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row (dblclick)="loadSubjects(i)" [style.background-color]="i === selectedRow ? 'rgb(237, 246, 246)' : null" (contextmenu)="openContextMenu($event, i)"
-          *matRowDef="let row;let i = index; columns: displayedColumns;" (click)="select(i)" class="home-table-row">
+        <tr mat-row (dblclick)="loadSubjects(i)"
+          [style.background-color]="i === selectedRow ? 'rgb(237, 246, 246)' : null"
+          (contextmenu)="openContextMenu($event, i)" *matRowDef="let row;let i = index; columns: displayedColumns;"
+          (click)="select(i)" class="home-table-row">
         </tr>
       </table>
+      <tr (contextmenu)="openContextMenu($event, -1)" (click)="openCreateDialog()" id="create-row"><mat-icon
+          id="create-icon">add</mat-icon></tr>
       <div style="height: 100%;" (contextmenu)="openContextMenu($event, -1)"></div>
     </div>
     <mat-paginator id="paginator-options" pageSize="15" showFirstLastButtons
@@ -47,5 +73,6 @@
     </mat-paginator>
   </div>
 </div>
-<app-home-menu (edit)="openEditDialog()" (create)="openCreateDialog()" (delete)="openDeleteDialog(selectedRow)" (close)="selectedRow = -1" [selectedFolder]="selectedRow >= 0" [open]="eventsSubject" id="home-menu"
+<app-home-menu (edit)="openEditDialog()" (create)="openCreateDialog()" (delete)="openDeleteDialog(selectedRow)"
+  (close)="selectedRow = -1" [selectedFolder]="selectedRow >= 0" [open]="eventsSubject" id="home-menu"
   [style.top]="menuPosition.y + 'px'" [style.left]="menuPosition.x + 'px'" style="position: absolute;"></app-home-menu>
