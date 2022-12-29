@@ -23,8 +23,10 @@ export class LoginComponent implements OnInit {
   constructor(private store : Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(clearAppUserCach());
-    this.store.dispatch(tryReLogin());
+    if(document.cookie.match(/^(.*;)?\s*SESSIONID\s*=\s*[^;]+(.*)?$/)) {
+      this.store.dispatch(clearAppUserCach());
+      this.store.dispatch(tryReLogin());
+    }
     this.store.select(selectAppUser).subscribe(appUser => {
       if(Object.keys(appUser).length !== 0){window.location.replace("./home");}
    });  

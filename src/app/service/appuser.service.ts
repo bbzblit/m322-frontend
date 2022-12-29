@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppUser } from '../model/appuser.model';
 import { LoginModel } from '../model/login.model';
+import { addError } from '../state/error.action';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,9 @@ export class AppuserService {
   }
 
   tryReLogin() : Observable<AppUser>{
+    if(!document.cookie.match(/^(.*;)?\s*SESSIONID\s*=\s*[^;]+(.*)?$/)) {
+      this.store.dispatch(addError({error : "Unauthorized", status: 401, message : "You need to login", path : "/**", timestamp : ""}))
+    }
     return this.http.get<AppUser>("/api/appuser/relogin");
   }
 

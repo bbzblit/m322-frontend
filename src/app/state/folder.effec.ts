@@ -1,34 +1,33 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { map, switchMap } from "rxjs";
-import { AppUser } from "../model/appuser.model";
+import { catchError, map, of, switchMap } from "rxjs";
+import { Exception } from "../model/exception.model";
 import { Folder } from "../model/folder.model";
-import { AppuserService } from "../service/appuser.service";
 import { FolderService } from "../service/folder.service";
-import { registerSuccess } from "./appuser.action";
+import { addError } from "./error.action";
 import { createFolder, createFolderSuccess, deleteFolderSuccess, deletFolder, loadFolders, loadFolderSuccess, updateFolder, updateFolderSuccess } from "./folder.action";
 
 @Injectable()
 export class FolderEffect {
 
-    constructor(private actions$: Actions, private folderService : FolderService) {}
+    constructor(private actions$: Actions, private folderService: FolderService) { }
 
     loadFolders$ = createEffect(() => this.actions$.pipe(
         ofType(loadFolders),
         switchMap(() =>
             this.folderService.loadAllFolder().pipe(
-                map((folders: Array<Folder>) => loadFolderSuccess({folders : folders })),
-                //catchError(error => console.log(error))) //TODO: Replace with exeption handeling
+                map((folders: Array<Folder>) => loadFolderSuccess({ folders: folders })),
+                catchError(error => of(addError(error.error as Exception)))
             )
         )
     ))
 
     deletFolder$ = createEffect(() => this.actions$.pipe(
         ofType(deletFolder),
-        switchMap(({folderId}) =>
+        switchMap(({ folderId }) =>
             this.folderService.deleteFolder(folderId).pipe(
-                map(() => deleteFolderSuccess({folderId : folderId })),
-                //catchError(error => console.log(error))) //TODO: Replace with exeption handeling
+                map(() => deleteFolderSuccess({ folderId: folderId })),
+                catchError(error => of(addError(error.error as Exception)))
             )
         )
     ))
@@ -37,8 +36,8 @@ export class FolderEffect {
         ofType(createFolder),
         switchMap((folder) =>
             this.folderService.createFolder(folder).pipe(
-                map((folder) =>  createFolderSuccess(folder)),
-                //catchError(error => console.log(error))) //TODO: Replace with exeption handeling
+                map((folder) => createFolderSuccess(folder)),
+                catchError(error => of(addError(error.error as Exception)))
             )
         )
     ))
@@ -47,8 +46,8 @@ export class FolderEffect {
         ofType(updateFolder),
         switchMap((folder) =>
             this.folderService.updateFolder(folder).pipe(
-                map((folder) =>  updateFolderSuccess(folder)),
-                //catchError(error => console.log(error))) //TODO: Replace with exeption handeling
+                map((folder) => updateFolderSuccess(folder)),
+                catchError(error => of(addError(error.error as Exception)))
             )
         )
     ))

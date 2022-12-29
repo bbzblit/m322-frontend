@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { AppUser } from '../model/appuser.model';
+import { Exception } from '../model/exception.model';
 import { LoginModel } from '../model/login.model';
 
 export const register = createAction(
@@ -37,3 +38,4 @@ export const logout = createAction(
 export const logoutSuccess = createAction(
   '[Collection] logout success'
 )
+

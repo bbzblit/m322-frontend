@@ -32,6 +32,9 @@ import { GradesOverviewComponent } from './grades-overview/grades-overview.compo
 import { GradesPopupHelperComponent } from './grades-overview/grades-popup-helper/grades-popup-helper.component';
 import { GradeComponent } from './grades-overview/grade/grade.component'; 
 import { GradesMenuComponent } from './grades-overview/grade-menu/grade-menu.component';
+import { errorReducer } from './state/error.reducer';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +58,7 @@ import { GradesMenuComponent } from './grades-overview/grade-menu/grade-menu.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({appUser : appUserReducer, folder : folderReducer}),
+    StoreModule.forRoot({appUser : appUserReducer, folder : folderReducer, error : errorReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AppUserEffect, FolderEffect]),
     BrowserAnimationsModule,
@@ -69,6 +72,7 @@ import { GradesMenuComponent } from './grades-overview/grade-menu/grade-menu.com
     MatMenuModule,
     MatDialogModule,
     MatToolbarModule,
+    MatSnackBarModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
