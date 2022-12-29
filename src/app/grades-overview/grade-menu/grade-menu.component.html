@@ -4,14 +4,18 @@
 <mat-menu (close)="closeEvent.emit()" #menu="matMenu">
   <button (click)="create.emit()" mat-menu-item>
     <mat-icon>create_new_folder</mat-icon>
-    <span>Create New</span>
+    <span>Create New Subject</span>
   </button>
   <button (click)="edit.emit()" *ngIf="selectedFolder" mat-menu-item>
     <mat-icon>edit</mat-icon>
-    <span>Edit</span>
+    <span>Edit Subject</span>
   </button>
   <button (click)="deleteFolder.emit()" *ngIf="selectedFolder" mat-menu-item>
     <mat-icon>delete_outline</mat-icon>
-    <span>Delete</span>
+    <span>Delete Subject</span>
+  </button>
+  <button (click)="addGrade.emit()" *ngIf="selectedFolder" mat-menu-item>
+    <mat-icon>add</mat-icon>
+    <span>Add Grade</span>
   </button>
 </mat-menu>

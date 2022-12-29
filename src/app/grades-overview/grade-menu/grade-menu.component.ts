@@ -17,6 +17,7 @@ export class GradesMenuComponent implements OnInit {
   @Output("create") create : EventEmitter<void> = new EventEmitter<void>();
   @Output("delete") deleteFolder : EventEmitter<void> = new EventEmitter<void>();
   @Output("edit") edit : EventEmitter<void> = new EventEmitter<void>();
+  @Output("addGrade") addGrade : EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild('menuTrigger') menuTrigger!: MatMenuTrigger;
 

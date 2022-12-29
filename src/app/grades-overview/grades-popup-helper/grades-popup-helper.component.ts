@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HomePopupHelperComponent } from 'src/app/home/home-popup-helper/home-popup-helper.component';
+import { Grade } from 'src/app/model/grade.model';
 
 @Component({
   selector: 'app-grades-popup-helper',
@@ -19,6 +20,11 @@ export class GradesPopupHelperComponent implements OnInit {
     }
     if(this.data.type === 'edit'){
       this.name = this.data.subject.name;
+    }
+    if(this.data.type === 'addGrade'){
+      if(!this.data.grade){
+        this.data.grade = {weight : 1} as Grade;
+      }
     }
 
   }

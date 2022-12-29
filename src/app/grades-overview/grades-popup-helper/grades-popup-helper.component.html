@@ -1,33 +1,58 @@
 <div *ngIf="data.type === 'create'">
-    <h1 mat-dialog-title>Create new Folder</h1>
+    <h1 mat-dialog-title>Create new Subject</h1>
     <p>Give your new Subject a name</p>
-    <mat-form-field  appearance="fill">
+    <mat-form-field appearance="fill">
         <mat-label>Subjectname</mat-label>
         <input required matInput [(ngModel)]="data.subject.name">
     </mat-form-field>
     <div mat-dialog-actions class="mat-dialog-actions">
-        <button (click)="dialogRef.close()"  class="resset-button" cdkFocusInitial mat-button mat-dialog-close>Abort</button>
-        <button [disabled]="data.subject.name.length === 0" [mat-dialog-close]="data.subject" mat-button mat-dialog-close>Save</button>
+        <button (click)="dialogRef.close()" class="resset-button" cdkFocusInitial mat-button
+            mat-dialog-close>Abort</button>
+        <button [disabled]="data.subject.name.length === 0" [mat-dialog-close]="data.subject" mat-button
+            mat-dialog-close>Save</button>
     </div>
 </div>
 <div *ngIf="data.type === 'delete'">
-    <h1 mat-dialog-title>Delete Folder</h1>
+    <h1 mat-dialog-title>Delete Subject</h1>
     <p>Do you realy want to delete the subject <i><b>{{data.subject.name}}</b></i></p>
     <div mat-dialog-actions class="mat-dialog-actions">
-        <button  [mat-dialog-close]="false" (click)="dialogRef.close()"  class="resset-button" cdkFocusInitial mat-button mat-dialog-close>Abort</button>
+        <button [mat-dialog-close]="false" (click)="dialogRef.close()" class="resset-button" cdkFocusInitial mat-button
+            mat-dialog-close>Abort</button>
         <button [mat-dialog-close]="true" mat-button mat-dialog-close>Delete</button>
     </div>
 </div>
 <div *ngIf="data.type === 'edit'">
-    <h1 mat-dialog-title>Edit Folder</h1>
+    <h1 mat-dialog-title>Edit Subject</h1>
     <p>Editing the folder <i><b>{{name}}</b></i></p>
-    <mat-form-field  appearance="fill">
+    <mat-form-field appearance="fill">
         <mat-label>Subjectname</mat-label>
         <input required matInput [(ngModel)]="data.subject.name">
     </mat-form-field>
 
     <div mat-dialog-actions class="mat-dialog-actions">
-        <button (click)="dialogRef.close()"  class="resset-button" cdkFocusInitial mat-button mat-dialog-close>Abort</button>
-        <button [disabled]="data.subject.name.length === 0" [mat-dialog-close]="data.subject" mat-button mat-dialog-close>Save</button>
+        <button (click)="dialogRef.close()" class="resset-button" cdkFocusInitial mat-button
+            mat-dialog-close>Abort</button>
+        <button [disabled]="data.subject.name.length === 0" [mat-dialog-close]="data.subject" mat-button
+            mat-dialog-close>Save</button>
+    </div>
+</div>
+<div *ngIf="data.type === 'addGrade'">
+    <h1 mat-dialog-title>Add Grade</h1>
+    <p>Adding a new Grade to subject</p>
+
+    <div style="display: flex; flex-direction: column;">
+        <mat-form-field appearance="fill">
+            <mat-label>Grade</mat-label>
+            <input type="number" max="6" min="1" required matInput [(ngModel)]="data.grade.value">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Weight of grade</mat-label>
+            <input type="number" min="0" required matInput [(ngModel)]="data.grade.weight">
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="mat-dialog-actions">
+        <button (click)="dialogRef.close()" class="resset-button" cdkFocusInitial mat-button
+            mat-dialog-close>Abort</button>
+        <button [disabled]="!data.grade.value || !data.grade.weight" [mat-dialog-close]="data.grade" mat-button mat-dialog-close>Save</button>
     </div>
 </div>

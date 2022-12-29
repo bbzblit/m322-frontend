@@ -49,6 +49,6 @@
     </div>
 </div>
 <app-grade-menu (close)="selectedSubject = -1" (edit)="openEditDialog()" (create)="openCreateDialog()"
-    (delete)="openDeleteDialog()" [selectedFolder]="selectedSubject >= 0" [open]="openEvent"
+    (addGrade)="openAddGradeDialog()" (delete)="openDeleteDialog()" [selectedFolder]="selectedSubject >= 0" [open]="openEvent"
     [style.top]="menuPosition.y + 'px'" [style.left]="menuPosition.x + 'px'"
     style="position: absolute;"></app-grade-menu>

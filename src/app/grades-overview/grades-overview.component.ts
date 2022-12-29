@@ -4,6 +4,7 @@ import { ActivatedRoute, TitleStrategy } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { Folder } from '../model/folder.model';
+import { Grade } from '../model/grade.model';
 import { SubjectModel } from '../model/subject.model';
 import { loadFolders, updateFolder } from '../state/folder.action';
 import { selectFolder, selectFolderById } from '../state/folder.selector';
@@ -20,7 +21,7 @@ export class GradesOverviewComponent implements OnInit {
 
   public folderId: string = "";
   public folder: Folder = { title: "", subjects: [] };
-  public displayedColumns: Array<string> = ['name','grades', 'actions'];
+  public displayedColumns: Array<string> = ['name', 'grades', 'actions'];
   public openEvent: Subject<void> = new Subject<void>();
   public selectedSubject: number = -1;
   public menuPosition = { x: 0, y: 0 };
@@ -70,14 +71,14 @@ export class GradesOverviewComponent implements OnInit {
     this.store.dispatch(updateFolder(this.folder));
   }
 
-  updateSubject(subject: SubjectModel, index : number){
-    if(!this.folder.subjects){
+  updateSubject(subject: SubjectModel, index: number) {
+    if (!this.folder.subjects) {
       return;
     }
 
     this.folder.subjects = [...this.folder.subjects];
     this.folder.subjects[index] = subject;
-    
+
     this.store.dispatch(updateFolder(this.folder));
   }
 
@@ -104,10 +105,23 @@ export class GradesOverviewComponent implements OnInit {
     const dialogRef = this.dialog.open(GradesPopupHelperComponent, {
       width: '24rem',
       height: '17rem',
-      data: { type: 'edit', subject: {...this.folder.subjects?.at(this.selectedSubject)}}
+      data: { type: 'edit', subject: { ...this.folder.subjects?.at(this.selectedSubject) } }
     })
 
     dialogRef.afterClosed().subscribe(_result => this.updateSubject(_result, this.selectedSubject));
+  }
+
+  createGrade(grade: Grade) {
+    //TODO: Implement when actions exist
+  }
+
+  openAddGradeDialog() {
+    const dialogRef = this.dialog.open(GradesPopupHelperComponent, {
+      width: '24ren',
+      height: '20rem',
+      data: { type: 'addGrade' }
+    })
+    dialogRef.afterClosed().subscribe(_result => this.createGrade(_result))
   }
 
 }
