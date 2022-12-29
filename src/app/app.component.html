@@ -1,6 +1,6 @@
 <mat-toolbar id="mat-header" class="primary">
-    <h1 [class.rgb]="rgb" (dblclick)="$event.preventDefault();rgb = !rgb" style="cursor: pointer; user-select: none;"
-        id="app-title" routerLink="home">M322</h1>
+    <h1 [class.rgb]="rgb" (dblclick)="$event.preventDefault();toggleRGB()" style="cursor: pointer; user-select: none;"
+        id="app-title" [routerLink]="url">M322</h1>
     <app-logout id="logout"></app-logout>
 </mat-toolbar>
 

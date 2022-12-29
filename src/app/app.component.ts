@@ -12,7 +12,7 @@ import { selectError } from './state/error.selector';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  rgb: boolean = false;
+  rgb: boolean = localStorage.getItem("rgb") === "true";
   title = 'grades-application-m120';
 
 
@@ -29,6 +29,18 @@ export class AppComponent {
     }
     let _snackBarRef = this._snackBar.open(exception.message, "Got it");
     _snackBarRef.onAction().subscribe(() => this.store.dispatch(deleteFirstError()))
+  }
+
+  get url(): string{
+    if(this.router.url === "/login" || this.router.url === "/sing-up"){
+      return "/login";
+    }
+    return "/home";
+  }
+
+  toggleRGB(){
+    this.rgb = !this.rgb;
+    localStorage.setItem("rgb", ""+this.rgb);
   }
 
 }
