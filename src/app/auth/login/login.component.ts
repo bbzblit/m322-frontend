@@ -18,21 +18,27 @@ export class LoginComponent implements OnInit {
     password: new FormControl("", [Validators.required]),
   });
 
-  passwordHide : boolean = true;
+  passwordHide: boolean = true;
 
-  constructor(private store : Store) { }
+  constructor(private store: Store) { }
 
-  ngOnInit(): void {
-    if(document.cookie.match(/^(.*;)?\s*SESSIONID\s*=\s*[^;]+(.*)?$/)) {
-      this.store.dispatch(clearAppUserCach());
-      this.store.dispatch(tryReLogin());
+  private getCookie(name: string) {
+    var cookieArr = document.cookie.split(";");
+    for (var i = 0; i < cookieArr.length; i++) {
+      var cookiePair = cookieArr[i].split("=");
+      if (name == cookiePair[0].trim()) {
+        return decodeURIComponent(cookiePair[1]);
+      }
     }
+    return null;
+  }
+  ngOnInit(): void {
     this.store.select(selectAppUser).subscribe(appUser => {
-      if(Object.keys(appUser).length !== 0){window.location.replace("./home");}
-   });  
+      if (Object.keys(appUser).length !== 0) { window.location.replace("./home"); }
+    });
   }
 
-  login(){
+  login() {
     let _data = this.loginForm.getRawValue() as LoginModel;
     this.store.dispatch(login(_data));
   }

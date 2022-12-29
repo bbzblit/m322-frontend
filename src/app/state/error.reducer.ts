@@ -9,6 +9,10 @@ const INITIAL_STATE: Array<Exception> = [];
 
 export const errorReducer = createReducer(
     INITIAL_STATE,
-    on(addError, (state, error) => state.concat([error])),
-    on(deleteFirstError, (state) => {state = [...state];state.shift(); return state}),
+    on(addError, (state, error) => {
+        let concatVar = [error];
+        state.forEach(_error => { if (error.message === _error.message) { concatVar = [] } });
+        return state.concat(concatVar);
+    }),
+    on(deleteFirstError, (state) => { state = [...state]; state.shift(); return state }),
 );
