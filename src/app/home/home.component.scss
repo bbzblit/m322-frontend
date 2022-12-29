@@ -35,29 +35,30 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;
 }
 
 .access-wrapper>p {
     margin: 0;
     margin-right: .5rem;
 }
+
 .access-wrapper:last-child {
     margin: 0 !important;
 }
 
 td,
-.home-table-head{
+.home-table-head {
     text-align: center;
 }
 
-.home-alt-text{
+.home-alt-text {
     font-style: italic;
     color: gray;
     margin: 0 !important;
 }
 
-.home-table-row{
+.home-table-row {
     cursor: pointer;
 }
 
@@ -65,6 +66,12 @@ td,
     background-color: rgb(237, 246, 246);
 }
 
-#home-menu{
+#home-menu {
     z-index: 100000;
 }
+
+.mat-column-actions {
+    flex: 0 0 18% !important;
+    width: 18% !important;
+}
+ 
