@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Store } from '@ngrx/store';
@@ -19,14 +19,14 @@ import { HomePopupHelperComponent } from './home-popup-helper/home-popup-helper.
 })
 export class HomeComponent implements OnInit {
 
-  public me! : AppUser;
-  public folder! : Array<Folder>;
+  public me!: AppUser;
+  public folder!: Array<Folder>;
   public displayedColumns: string[] = ['title', 'owner', 'viewAccess', 'writeAccess', 'actions'];
-  public selectedRow : number = -1;
-  public menuPosition =  {x: 0, y: 0}; 
+  public selectedRow: number = -1;
+  public menuPosition = { x: 0, y: 0 };
   public eventsSubject: Subject<void> = new Subject<void>();
-  
-  constructor(private store : Store, public dialog: MatDialog) { }
+
+  constructor(private store: Store, public dialog: MatDialog) { }
 
 
 
@@ -38,11 +38,11 @@ export class HomeComponent implements OnInit {
   }
 
 
-  select(row : number){
+  select(row: number) {
 
   }
 
-  openContextMenu(_event : any, index : number){
+  openContextMenu(_event: any, index: number) {
     let event = _event as PointerEvent;
     event.preventDefault();
     this.selectedRow = index;
@@ -51,32 +51,32 @@ export class HomeComponent implements OnInit {
     this.menuPosition.y = event.clientY;
   }
 
-  deleteRow(confirm : boolean, index : number){
-    if(confirm){
-      this.store.dispatch(deletFolder({folderId : this.folder[index].id!}))
+  deleteRow(confirm: boolean, index: number) {
+    if (confirm) {
+      this.store.dispatch(deletFolder({ folderId: this.folder[index].id! }))
     }
   }
 
-  openDeleteDialog(index : number){
+  openDeleteDialog(index: number) {
     const dialogRef = this.dialog.open(HomePopupHelperComponent, {
       width: '30rem',
       height: '12rem',
-      data: {type: 'delete', foldername: this.folder[this.selectedRow].title},
+      data: { type: 'delete', foldername: this.folder[this.selectedRow].title },
     });
 
     dialogRef.afterClosed().subscribe(_result => this.deleteRow(_result, index));
   }
-  
-  createFolder(folder : Folder){
-    if(!folder){return;}
-    this.store.dispatch(createFolder(folder));
-    }
 
-  openCreateDialog(){
+  createFolder(folder: Folder) {
+    if (!folder) { return; }
+    this.store.dispatch(createFolder(folder));
+  }
+  
+  openCreateDialog() {
     const dialogRef = this.dialog.open(HomePopupHelperComponent, {
       width: '24rem',
       height: '17rem',
-      data: {type: 'create'},
+      data: { type: 'create' },
     });
 
     dialogRef.afterClosed().subscribe(_result => this.createFolder(_result as Folder))
@@ -84,21 +84,21 @@ export class HomeComponent implements OnInit {
     console.log("Creating new folder");
   }
 
-  editFolder(folder : Folder){
-    if(!folder){return;}
+  editFolder(folder: Folder) {
+    if (!folder) { return; }
     this.store.dispatch(updateFolder(folder));
   }
 
-  openEditDialog(){
+  openEditDialog() {
     const dialogRef = this.dialog.open(HomePopupHelperComponent, {
       width: '24rem',
       height: '17rem',
-      data: {type: 'edit', oldfolder : this.folder[this.selectedRow]},
+      data: { type: 'edit', oldfolder: this.folder[this.selectedRow] },
     });
     dialogRef.afterClosed().subscribe(_result => this.editFolder(_result as Folder))
   }
 
-  loadSubjects(index : number){
+  loadSubjects(index: number) {
     let _folder = this.folder[index]
     window.location.replace("./edit/" + _folder.id);
   }
