@@ -9,14 +9,19 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row  class="subject-row" [style.background-color]="i === selectedSubject ? 'rgb(237, 246, 246)' : null"
+            <tr mat-row class="subject-row"
+                [style.background-color]="i === selectedSubject ? 'rgb(237, 246, 246)' : null"
                 *matRowDef="let row; columns: displayedColumns; let i = index" (contextmenu)="openMenu($event, i)"></tr>
         </table>
+        <tr (contextmenu)="$event.preventDefault();openCreateDialog()" (click)="openCreateDialog()" id="create-row"><mat-icon
+                id="create-icon">add</mat-icon></tr>
+
         <div id="context-clicker" style="height: 100%;" (contextmenu)="openMenu($event, -1)"></div>
         <mat-paginator id="paginator-options" pageSize="15" showFirstLastButtons>
         </mat-paginator>
     </div>
 </div>
-<app-home-menu (close)="selectedSubject = -1" (edit)="openEditDialog()" (create)="openCreateDialog()" (delete)="openDeleteDialog()"
-    [selectedFolder]="selectedSubject >= 0" [open]="openEvent" [style.top]="menuPosition.y + 'px'"
-    [style.left]="menuPosition.x + 'px'" style="position: absolute;"></app-home-menu>
+<app-home-menu (close)="selectedSubject = -1" (edit)="openEditDialog()" (create)="openCreateDialog()"
+    (delete)="openDeleteDialog()" [selectedFolder]="selectedSubject >= 0" [open]="openEvent"
+    [style.top]="menuPosition.y + 'px'" [style.left]="menuPosition.x + 'px'"
+    style="position: absolute;"></app-home-menu>

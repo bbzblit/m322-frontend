@@ -68,39 +68,3 @@ td,
 #home-menu{
     z-index: 100000;
 }
-
-#create-row{
-    cursor: pointer;
-    height: 6rem;
-    border: 2px dashed lightgray;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#create-icon{
-    color: grey;
-    font-size: 1.7rem;
-}
-
-.action-wrapper{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.action-button{
-    cursor: pointer;
-    width: max-content;
-    border: none;
-    background: none;
-    margin: 0;
-    padding-top: 1rem;
-    margin-right: .3rem;
-    padding-bottom: 1rem;
-}
-.action-button:hover{
-    color: brown;
-}

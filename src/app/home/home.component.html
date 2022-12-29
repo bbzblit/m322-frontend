@@ -58,13 +58,13 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row (dblclick)="loadSubjects(i)"
+        <tr mat-row (dblclick)="loadSubjects(i)" (click)="loadSubjects(i)"
           [style.background-color]="i === selectedRow ? 'rgb(237, 246, 246)' : null"
           (contextmenu)="openContextMenu($event, i)" *matRowDef="let row;let i = index; columns: displayedColumns;"
           (click)="select(i)" class="home-table-row">
         </tr>
       </table>
-      <tr (contextmenu)="openContextMenu($event, -1)" (click)="openCreateDialog()" id="create-row"><mat-icon
+      <tr (contextmenu)="$event.preventDefault();openCreateDialog()" (click)="openCreateDialog()" id="create-row"><mat-icon
           id="create-icon">add</mat-icon></tr>
       <div style="height: 100%;" (contextmenu)="openContextMenu($event, -1)"></div>
     </div>
