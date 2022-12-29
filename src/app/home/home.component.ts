@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   openDeleteDialog(index : number){
     const dialogRef = this.dialog.open(HomePopupHelperComponent, {
       width: '30rem',
-      height: '10rem',
+      height: '12rem',
       data: {type: 'delete', foldername: this.folder[this.selectedRow].title},
     });
 

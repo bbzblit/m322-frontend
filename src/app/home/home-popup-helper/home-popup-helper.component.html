@@ -24,7 +24,7 @@
 
 <div *ngIf="data.type === 'edit'">
     <h1 mat-dialog-title>Edit Folder</h1>
-    <p>Editing Folder {{data.folder.title}}</p>
+    <p>Editing Folder {{name}}</p>
     <mat-form-field appearance="fill">
         <mat-label>Foldername</mat-label>
         <input required matInput [(ngModel)]="data.folder.title">

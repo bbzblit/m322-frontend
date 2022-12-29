@@ -12,9 +12,13 @@ export class GradesPopupHelperComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<HomePopupHelperComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  name : string = "";
   ngOnInit(): void {
     if(this.data.type === 'create'){
       this.data.subject = {name : ""}
+    }
+    if(this.data.type === 'edit'){
+      this.name = this.data.subject.name;
     }
 
   }

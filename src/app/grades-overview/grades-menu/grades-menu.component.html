@@ -1,9 +1,0 @@
-<button style="height: 0px; width: 0; z-index: 0; opacity: 0;" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
-</button>
-
-<mat-menu (close)="closeEvent.emit()" #menu="matMenu">
-  <button (click)="createSubject.emit()" mat-menu-item>
-    <mat-icon>create_new_folder</mat-icon>
-    <span>Create new subject</span>
-  </button>
-</mat-menu>
