@@ -22,7 +22,7 @@ export class GradesOverviewComponent implements OnInit {
   public folder: Folder = { title: "", subjects: [] };
   public displayedColumns: Array<string> = ['name'];
   public openEvent: Subject<void> = new Subject<void>();
-  public selectedSubject: number = 0;
+  public selectedSubject: number = -1;
   public menuPosition = { x: 0, y: 0 };
 
   constructor(private route: ActivatedRoute, private store: Store, public dialog: MatDialog) { }
@@ -74,7 +74,7 @@ export class GradesOverviewComponent implements OnInit {
     if(!this.folder.subjects){
       return;
     }
-    
+
     this.folder.subjects = [...this.folder.subjects];
     this.folder.subjects[index] = subject;
     
