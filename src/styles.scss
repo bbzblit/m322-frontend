@@ -174,3 +174,16 @@ app-root{
 .action-button:hover{
     color: brown;
 }
+
+.direct-link{
+    font-size: large;
+    color: rgb(57, 57, 57);
+    text-align: center;
+    cursor: pointer;
+    margin-top: .5rem;
+    text-decoration: none;
+}
+.direct-link:hover{
+    color: rgb(57, 57, 57);
+    text-decoration: underline;
+}

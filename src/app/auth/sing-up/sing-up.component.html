@@ -47,5 +47,6 @@
         </mat-form-field>
         <button [disabled]="!singUpForm.valid || singUpForm.value.password != retypePassword.value" mat-stroked-button
             color="primary">Register</button>
+        <a class="direct-link" routerLink="../login">Or Login</a>
     </form>
 </div>
