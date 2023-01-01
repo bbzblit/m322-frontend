@@ -133,8 +133,10 @@ export class GradesOverviewComponent implements OnInit {
 
   deletGrade(grade: Grade) {
     this.store.dispatch(deleteGrade({ gradeId: grade.id!, folderId: this.folder.id!, subjectId: this.folder.subjects?.at(this.selectedSubject)?.id! }));
+    let caschedSubect = -1;
+    caschedSubect = this.selectedSubject;
     let snackBarRef = this._snackBar.open('Deleted Grade', 'Undo', { duration: 3000 });
-    snackBarRef.onAction().subscribe(() => this.createGrade(grade, this.folder.id!, this.folder.subjects?.at(this.selectedSubject)?.id!));
+    snackBarRef.onAction().subscribe(() => this.createGrade(grade, this.folder.id!, this.folder.subjects?.at(caschedSubect)?.id!));
     this.selectedSubject = -1;
   }
 
