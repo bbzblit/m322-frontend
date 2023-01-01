@@ -12,3 +12,13 @@ export const addGradeSuccess = createAction(
   '[Collecton] add grade succes',
   props<SubjectModel>()
 );
+
+export const deleteGrade = createAction(
+  '[API] Removing grade',
+  props<{gradeId : string, folderId : string, subjectId : string}>()
+)
+
+export const deleteGradeSuccess = createAction(
+  '[Collecton] delete grade succes',
+  props<SubjectModel>()
+);

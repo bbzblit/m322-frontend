@@ -14,7 +14,7 @@
                 <th class="subject-table-head" mat-header-cell *matHeaderCellDef>
                     <p class="global-table-title">Grades</p>
                 </th>
-                <td mat-cell *matCellDef="let element"><app-grade *ngFor="let grade of element.grades"></app-grade></td>
+                <td mat-cell *matCellDef="let element"><app-grade (createNewGrade)="openAddGradeDialog()" (deleteGrade)="deletGrade($event)" [grades]="element.grades"></app-grade></td>
             </ng-container>
 
 

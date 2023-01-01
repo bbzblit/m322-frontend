@@ -16,4 +16,8 @@ export class GradeService {
     return this.http.post("/api/grade?folderId=" + folderId + "&subjectId=" + subjectId, grade);
   }
 
+  deleteGrade(gradeId : string, folderId : string, subjectId : string) : Observable<SubjectModel>{
+    return this.http.delete("/api/grade?folderId=" + folderId + "&subjectId=" + subjectId + "&gradeId=" + gradeId);
+  }
+
 }

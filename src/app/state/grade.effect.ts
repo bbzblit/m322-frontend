@@ -12,7 +12,7 @@ import { AppuserService } from "../service/appuser.service";
 import { GradeService } from "../service/grade.service";
 import { login, loginSuccess, logout, logoutSuccess, register, registerSuccess, tryReLogin } from "./appuser.action";
 import { addError } from "./error.action";
-import { addGrade, addGradeSuccess } from "./grade.action";
+import { addGrade, addGradeSuccess, deleteGrade, deleteGradeSuccess } from "./grade.action";
 
 @Injectable()
 export class GradeEffect {
@@ -23,6 +23,16 @@ export class GradeEffect {
     switchMap(({grade, folderId, subjectId}) =>
       this.gradeService.createGrade(grade, folderId, subjectId).pipe(
         map((subject: SubjectModel) => addGradeSuccess(subject)),
+        catchError(error => of(addError(error.error as Exception)))
+      )
+    )
+  ))
+
+  deleteGrade$ = createEffect(() => this.actions$.pipe(
+    ofType(deleteGrade),
+    switchMap(({gradeId, folderId, subjectId}) =>
+      this.gradeService.deleteGrade(gradeId, folderId, subjectId).pipe(
+        map((subject: SubjectModel) => deleteGradeSuccess(subject)),
         catchError(error => of(addError(error.error as Exception)))
       )
     )

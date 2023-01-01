@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, TitleStrategy } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
@@ -8,7 +9,7 @@ import { Grade } from '../model/grade.model';
 import { SubjectModel } from '../model/subject.model';
 import { loadFolders, updateFolder } from '../state/folder.action';
 import { selectFolder, selectFolderById } from '../state/folder.selector';
-import { addGrade } from '../state/grade.action';
+import { addGrade, deleteGrade } from '../state/grade.action';
 import { GradesPopupHelperComponent } from './grades-popup-helper/grades-popup-helper.component';
 
 @Component({
@@ -27,7 +28,7 @@ export class GradesOverviewComponent implements OnInit {
   public selectedSubject: number = -1;
   public menuPosition = { x: 0, y: 0 };
 
-  constructor(private route: ActivatedRoute, private store: Store, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private store: Store, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   loader(folder: Array<Folder>) {
     if (folder.length === 0 && !this.loaded) {
@@ -114,8 +115,8 @@ export class GradesOverviewComponent implements OnInit {
 
   createGrade(grade: Grade, folderId: string, subjectId: string) {
 
-    if(!grade){
-      return; 
+    if (!grade) {
+      return;
     }
 
     this.store.dispatch(addGrade({ grade: grade, folderId: folderId, subjectId: subjectId }));
@@ -130,4 +131,11 @@ export class GradesOverviewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(_result => this.createGrade(_result, this.folder.id!, this.folder.subjects?.at(this.selectedSubject)?.id!))
   }
 
+  deletGrade(grade: Grade) {
+    this.store.dispatch(deleteGrade({ gradeId: grade.id!, folderId: this.folder.id!, subjectId: this.folder.subjects?.at(this.selectedSubject)?.id! }));
+    let snackBarRef = this._snackBar.open('Deleted Grade', 'Undo', {duration : 3000});
+    snackBarRef.onAction().subscribe(() => this.createGrade(grade, this.folder.id!, this.folder.subjects?.at(this.selectedSubject)?.id!));
+  }
+
 }
+ 

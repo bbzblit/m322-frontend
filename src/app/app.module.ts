@@ -35,6 +35,7 @@ import { GradesMenuComponent } from './grades-overview/grade-menu/grade-menu.com
 import { errorReducer } from './state/error.reducer';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { GradeEffect } from './state/grade.effect';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { GradeEffect } from './state/grade.effect';
     MatDialogModule,
     MatToolbarModule,
     MatSnackBarModule,
+    MatChipsModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
