@@ -1,5 +1,5 @@
 <mat-chip-list class="grades-wrapper" #chipGrid>
-    <mat-chip (removed)="deleteGrade.emit(grade)" [class.failed]="grade.value! < 4" [class.passed]="grade.value! >= 4 && grade.value! < 4.5"
+    <mat-chip (removed)="deleteGrade.emit(grade)" (click)="viewGrade.emit(grade)" [class.failed]="grade.value! < 4" [class.passed]="grade.value! >= 4 && grade.value! < 4.5"
         [class.good-work]="grade.value! >= 4.5" *ngFor="let grade of grades">
         {{grade.value}}
         <mat-icon matChipRemove>cancel</mat-icon>

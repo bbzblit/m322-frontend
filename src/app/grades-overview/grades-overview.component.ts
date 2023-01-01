@@ -23,7 +23,7 @@ export class GradesOverviewComponent implements OnInit {
 
   public folderId: string = "";
   public folder: Folder = { title: "", subjects: [] };
-  public displayedColumns: Array<string> = ['name', 'grades', 'actions'];
+  public displayedColumns: Array<string> = ['name', 'grades', 'average', 'actions'];
   public openEvent: Subject<void> = new Subject<void>();
   public selectedSubject: number = -1;
   public menuPosition = { x: 0, y: 0 };
@@ -74,7 +74,7 @@ export class GradesOverviewComponent implements OnInit {
   }
 
   updateSubject(subject: SubjectModel, index: number) {
-    if (!this.folder.subjects) {
+    if (!this.folder.subjects || !subject) {
       return;
     }
 
@@ -114,7 +114,7 @@ export class GradesOverviewComponent implements OnInit {
   }
 
   createGrade(grade: Grade, folderId: string, subjectId: string) {
-
+    this.selectedSubject = -1;
     if (!grade) {
       return;
     }
@@ -124,8 +124,8 @@ export class GradesOverviewComponent implements OnInit {
 
   openAddGradeDialog() {
     const dialogRef = this.dialog.open(GradesPopupHelperComponent, {
-      width: '24ren',
-      height: '20rem',
+      width: '30rem',
+      height: '22rem',
       data: { type: 'addGrade' }
     })
     dialogRef.afterClosed().subscribe(_result => this.createGrade(_result, this.folder.id!, this.folder.subjects?.at(this.selectedSubject)?.id!))
@@ -133,9 +133,28 @@ export class GradesOverviewComponent implements OnInit {
 
   deletGrade(grade: Grade) {
     this.store.dispatch(deleteGrade({ gradeId: grade.id!, folderId: this.folder.id!, subjectId: this.folder.subjects?.at(this.selectedSubject)?.id! }));
-    let snackBarRef = this._snackBar.open('Deleted Grade', 'Undo', {duration : 3000});
+    let snackBarRef = this._snackBar.open('Deleted Grade', 'Undo', { duration: 3000 });
     snackBarRef.onAction().subscribe(() => this.createGrade(grade, this.folder.id!, this.folder.subjects?.at(this.selectedSubject)?.id!));
+    this.selectedSubject = -1;
+  }
+
+  getAverage(grades: Array<Grade>): number {
+    if (!grades) {
+      return NaN
+    }
+    let average = 0;
+    let totalWeight = 0;
+    grades.forEach(grade => { average += grade.value! * grade.weight!; totalWeight += grade.weight! });
+
+    return Math.round(average / totalWeight * 100) / 100;
+  }
+
+  openViewGradeDialog(grade: Grade) {
+    const dialogRef = this.dialog.open(GradesPopupHelperComponent, {
+      width: '30rem',
+      height: '22rem',
+      data: { type: 'viewGrade', grade: grade },
+    })
   }
 
 }
- 

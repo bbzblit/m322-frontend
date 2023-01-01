@@ -26,7 +26,6 @@ export class GradesPopupHelperComponent implements OnInit {
         this.data.grade = {weight : 1} as Grade;
       }
     }
-
   }
 
 }

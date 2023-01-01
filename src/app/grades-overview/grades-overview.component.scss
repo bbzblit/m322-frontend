@@ -39,3 +39,15 @@ td,
     flex: 0 0 60% !important;
     width: 60% !important;
 }
+
+.failed{
+
+    background-color: rgb(199, 8, 8);
+
+}
+.passed{
+    background-color: orange;
+}
+.good-work{
+    background-color: rgb(0, 194, 0);
+}

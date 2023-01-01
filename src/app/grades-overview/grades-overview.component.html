@@ -14,7 +14,22 @@
                 <th class="subject-table-head" mat-header-cell *matHeaderCellDef>
                     <p class="global-table-title">Grades</p>
                 </th>
-                <td mat-cell *matCellDef="let element"><app-grade (createNewGrade)="openAddGradeDialog()" (deleteGrade)="deletGrade($event)" [grades]="element.grades"></app-grade></td>
+                <td mat-cell *matCellDef="let element; let i = index"><app-grade (createNewGrade)="selectedSubject = i;openAddGradeDialog()"
+                        (deleteGrade)="selectedSubject = i;deletGrade($event)" [grades]="element.grades" (viewGrade)="openViewGradeDialog($event)"></app-grade></td>
+            </ng-container>
+
+            <ng-container matColumnDef="average">
+                <th class="subject-table-head" mat-header-cell *matHeaderCellDef>
+                    <p class="global-table-title">Average</p>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <div *ngFor="let avr of [getAverage(element.grades)]"> <mat-chip 
+                            [class.failed]="avr < 4" [class.passed]="avr >= 4 && avr < 4.5"
+                            [class.good-work]="avr >= 4.5">
+                            {{avr}}
+                        </mat-chip>
+                    </div>
+                </td>
             </ng-container>
 
 
@@ -49,6 +64,6 @@
     </div>
 </div>
 <app-grade-menu (close)="selectedSubject = -1" (edit)="openEditDialog()" (create)="openCreateDialog()"
-    (addGrade)="openAddGradeDialog()" (delete)="openDeleteDialog()" [selectedFolder]="selectedSubject >= 0" [open]="openEvent"
-    [style.top]="menuPosition.y + 'px'" [style.left]="menuPosition.x + 'px'"
+    (addGrade)="openAddGradeDialog()" (delete)="openDeleteDialog()" [selectedFolder]="selectedSubject >= 0"
+    [open]="openEvent" [style.top]="menuPosition.y + 'px'" [style.left]="menuPosition.x + 'px'"
     style="position: absolute;"></app-grade-menu>

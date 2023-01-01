@@ -1,5 +1,5 @@
 <!--Delete Popup-->
-<div *ngIf="data.type === 'delete'">
+<div class="popup"  *ngIf="data.type === 'delete'">
     <h1 mat-dialog-title>Delete Folder</h1>
     <div id="text-wrapper" mat-dialog-content>
         Would you like to delete the Folder {{data.foldername}} ?
@@ -9,7 +9,7 @@
         <button [mat-dialog-close]="true" mat-button mat-dialog-close>Ok</button>
     </div>
 </div>
-<div *ngIf="data.type === 'create'">
+<div class="popup"  *ngIf="data.type === 'create'">
     <h1 mat-dialog-title>Create new Folder</h1>
     <p>Give your new Folder a name</p>
     <mat-form-field  appearance="fill">
@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<div *ngIf="data.type === 'edit'">
+<div class="popup"  *ngIf="data.type === 'edit'">
     <h1 mat-dialog-title>Edit Folder</h1>
     <p>Editing Folder {{name}}</p>
     <mat-form-field appearance="fill">

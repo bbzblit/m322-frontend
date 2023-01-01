@@ -1,4 +1,4 @@
-<div *ngIf="data.type === 'create'">
+<div class="popup" *ngIf="data.type === 'create'">
     <h1 mat-dialog-title>Create new Subject</h1>
     <p>Give your new Subject a name</p>
     <mat-form-field appearance="fill">
@@ -12,7 +12,7 @@
             mat-dialog-close>Save</button>
     </div>
 </div>
-<div *ngIf="data.type === 'delete'">
+<div class="popup" *ngIf="data.type === 'delete'">
     <h1 mat-dialog-title>Delete Subject</h1>
     <p>Do you realy want to delete the subject <i><b>{{data.subject.name}}</b></i></p>
     <div mat-dialog-actions class="mat-dialog-actions">
@@ -21,7 +21,7 @@
         <button [mat-dialog-close]="true" mat-button mat-dialog-close>Delete</button>
     </div>
 </div>
-<div *ngIf="data.type === 'edit'">
+<div class="popup" *ngIf="data.type === 'edit'">
     <h1 mat-dialog-title>Edit Subject</h1>
     <p>Editing the folder <i><b>{{name}}</b></i></p>
     <mat-form-field appearance="fill">
@@ -36,7 +36,7 @@
             mat-dialog-close>Save</button>
     </div>
 </div>
-<div *ngIf="data.type === 'addGrade'">
+<div class="popup" *ngIf="data.type === 'addGrade'">
     <h1 mat-dialog-title>Add Grade</h1>
     <p>Adding a new Grade to subject</p>
 
@@ -60,5 +60,25 @@
         <button (click)="dialogRef.close()" class="resset-button" cdkFocusInitial mat-button
             mat-dialog-close>Abort</button>
         <button [disabled]="!grade.valid || !weight.valid" [mat-dialog-close]="data.grade" mat-button mat-dialog-close>Save</button>
+    </div>
+</div>
+
+<div class="popup" *ngIf="data.type === 'viewGrade'">
+    <h1 mat-dialog-title>View Grade</h1>
+    <p>Grades cant be editited. <br/> If you made an error do you have to delete it and create a new one.</p>
+
+    <div style="display: flex; flex-direction: column;">
+        <mat-form-field  appearance="fill">
+            <mat-label>Grade</mat-label>
+            <input disabled required matInput [(ngModel)]="data.grade.value">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Weight of grade</mat-label>
+            <input disabled type="number" required matInput [(ngModel)]="data.grade.weight">
+        </mat-form-field>
+    </div>
+    <div style="margin-left: max;" mat-dialog-actions class="mat-dialog-actions">
+        <button (click)="dialogRef.close()" class="resset-button" cdkFocusInitial mat-button
+            mat-dialog-close>Close</button>
     </div>
 </div>
