@@ -61,7 +61,7 @@
         <tr mat-row (dblclick)="loadSubjects(i)" (click)="loadSubjects(i)"
           [style.background-color]="i === selectedRow ? 'rgb(237, 246, 246)' : null"
           (contextmenu)="openContextMenu($event, i)" *matRowDef="let row;let i = index; columns: displayedColumns;"
-          (click)="select(i)" class="home-table-row">
+           class="home-table-row">
         </tr>
       </table>
       <tr (contextmenu)="$event.preventDefault();openCreateDialog()" (click)="openCreateDialog()" id="create-row"><mat-icon

@@ -41,18 +41,24 @@
     <p>Adding a new Grade to subject</p>
 
     <div style="display: flex; flex-direction: column;">
-        <mat-form-field appearance="fill">
+        <mat-form-field  appearance="fill">
             <mat-label>Grade</mat-label>
-            <input type="number" max="6" min="1" required matInput [(ngModel)]="data.grade.value">
+            <input  #grade="ngModel"  type="number" max="6" min="1"  required matInput [(ngModel)]="data.grade.value">
+            <mat-error>
+                Grade needs to be in the range from 1-6!
+            </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Weight of grade</mat-label>
-            <input type="number" min="0" required matInput [(ngModel)]="data.grade.weight">
+            <input  #weight="ngModel" type="number" min="0" required matInput [(ngModel)]="data.grade.weight">
+            <mat-error>
+                Weight has to be a positiv number
+            </mat-error>
         </mat-form-field>
     </div>
     <div mat-dialog-actions class="mat-dialog-actions">
         <button (click)="dialogRef.close()" class="resset-button" cdkFocusInitial mat-button
             mat-dialog-close>Abort</button>
-        <button [disabled]="!data.grade.value || !data.grade.weight" [mat-dialog-close]="data.grade" mat-button mat-dialog-close>Save</button>
+        <button [disabled]="!grade.valid || !weight.valid" [mat-dialog-close]="data.grade" mat-button mat-dialog-close>Save</button>
     </div>
 </div>

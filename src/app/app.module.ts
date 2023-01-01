@@ -34,6 +34,7 @@ import { GradeComponent } from './grades-overview/grade/grade.component';
 import { GradesMenuComponent } from './grades-overview/grade-menu/grade-menu.component';
 import { errorReducer } from './state/error.reducer';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { GradeEffect } from './state/grade.effect';
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HttpClientModule,
     StoreModule.forRoot({appUser : appUserReducer, folder : folderReducer, error : errorReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AppUserEffect, FolderEffect]),
+    EffectsModule.forRoot([AppUserEffect, FolderEffect, GradeEffect]),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,

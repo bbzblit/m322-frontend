@@ -37,11 +37,6 @@ export class HomeComponent implements OnInit {
     this.store.select(selectFolder).subscribe(folders => this.folder = folders);
   }
 
-
-  select(row: number) {
-
-  }
-
   openContextMenu(_event: any, index: number) {
     let event = _event as PointerEvent;
     event.preventDefault();

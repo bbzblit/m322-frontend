@@ -8,6 +8,7 @@ import { Grade } from '../model/grade.model';
 import { SubjectModel } from '../model/subject.model';
 import { loadFolders, updateFolder } from '../state/folder.action';
 import { selectFolder, selectFolderById } from '../state/folder.selector';
+import { addGrade } from '../state/grade.action';
 import { GradesPopupHelperComponent } from './grades-popup-helper/grades-popup-helper.component';
 
 @Component({
@@ -111,8 +112,13 @@ export class GradesOverviewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(_result => this.updateSubject(_result, this.selectedSubject));
   }
 
-  createGrade(grade: Grade) {
-    //TODO: Implement when actions exist
+  createGrade(grade: Grade, folderId: string, subjectId: string) {
+
+    if(!grade){
+      return; 
+    }
+
+    this.store.dispatch(addGrade({ grade: grade, folderId: folderId, subjectId: subjectId }));
   }
 
   openAddGradeDialog() {
@@ -121,7 +127,7 @@ export class GradesOverviewComponent implements OnInit {
       height: '20rem',
       data: { type: 'addGrade' }
     })
-    dialogRef.afterClosed().subscribe(_result => this.createGrade(_result))
+    dialogRef.afterClosed().subscribe(_result => this.createGrade(_result, this.folder.id!, this.folder.subjects?.at(this.selectedSubject)?.id!))
   }
 
 }
