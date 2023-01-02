@@ -6,8 +6,8 @@ import { Subject } from 'rxjs';
 import { AppUser } from '../model/appuser.model';
 import { Folder } from '../model/folder.model';
 import { AppuserService } from '../service/appuser.service';
-import { register, tryReLogin } from '../state/appuser.action';
-import { selectAppUser } from '../state/appuser.selector';
+import { register, tryReLogin } from '../state/auth.action';
+import { selectAuthUser } from '../state/auth.selector';
 import { createFolder, deletFolder, loadFolders, updateFolder } from '../state/folder.action';
 import { selectFolder } from '../state/folder.selector';
 import { HomePopupHelperComponent } from './home-popup-helper/home-popup-helper.component';
@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadFolders());
-    this.store.select(selectAppUser).subscribe(me => this.me = me);
+    this.store.select(selectAuthUser).subscribe(me => this.me = me);
     this.store.select(selectFolder).subscribe(folders => this.folder = folders);
   }
 

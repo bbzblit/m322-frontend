@@ -1,7 +1,7 @@
 <div id="editing-wrapper">
     <div id="title-wrapper">
         <h1 id="subject-title">Editing {{folder.title}}</h1>
-        <button id="share-button" mat-icon-button>
+        <button (click)="openShareDialog()" id="share-button" mat-icon-button>
             <mat-icon id="share-icon">share</mat-icon>
         </button>
     </div>

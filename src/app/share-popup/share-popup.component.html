@@ -1,0 +1,20 @@
+<div id="share-top">
+    <button mat-dialog-close id="close-button" mat-icon-button (click)="dialogRef.close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div id="share-body">
+    <h1 style="font-size: large;">Managing access for folder <b>{{data.folder.title}}</b></h1>
+    <h1 style="font-size: medium; margin-top: 2rem;">Give access to an other user</h1>
+    <form [formGroup]="shareForm" id="share-access-form">
+        <mat-form-field id="shared-email-input" >
+            <mat-label>Enter email or username</mat-label>
+            <input formControlName="userNameOrEmail" required matInput placeholder="somebody@example.com">
+        </mat-form-field>
+        <mat-radio-group formControlName="readWrite" id="access-right-group" required>
+            <mat-radio-button value="write">Write access</mat-radio-button> <br/>
+            <mat-radio-button value="read">Read access</mat-radio-button>
+        </mat-radio-group>
+        <button [disabled]="!shareForm.valid" (click)="initAccessFlow()" mat-stroked-button>Give access</button>
+    </form>
+</div>

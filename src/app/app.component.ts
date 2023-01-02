@@ -27,7 +27,7 @@ export class AppComponent {
     if(exception.status === 401){
       this.router.navigate(["/login"]);
     }
-    let _snackBarRef = this._snackBar.open(exception.message, "Got it");
+    let _snackBarRef = this._snackBar.open(exception.message!, "Got it");
     _snackBarRef.onAction().subscribe(() => this.store.dispatch(deleteFirstError()))
   }
 

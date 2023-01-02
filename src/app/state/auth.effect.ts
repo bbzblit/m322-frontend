@@ -6,11 +6,11 @@ import { AppUser } from "../model/appuser.model";
 import { Exception } from "../model/exception.model";
 import { LoginModel } from "../model/login.model";
 import { AppuserService } from "../service/appuser.service";
-import { login, loginSuccess, logout, logoutSuccess, register, registerSuccess, tryReLogin } from "./appuser.action";
+import { login, loginSuccess, logout, logoutSuccess, register, registerSuccess, tryReLogin } from "./auth.action";
 import { addError } from "./error.action";
 
 @Injectable()
-export class AppUserEffect {
+export class AuthEffect {
   constructor(private actions$: Actions, private appUserService: AppuserService) { }
 
   singUp$ = createEffect(() => this.actions$.pipe(

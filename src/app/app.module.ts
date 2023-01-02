@@ -11,8 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { appUserReducer } from './state/appuser.reducer';
-import { AppUserEffect } from './state/appuser.effect';
+import { authReducer } from './state/auth.reducer';
+import { AuthEffect } from './state/auth.effect';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -36,6 +36,10 @@ import { errorReducer } from './state/error.reducer';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { GradeEffect } from './state/grade.effect';
 import {MatChipsModule} from '@angular/material/chips';
+import { SharePopupComponent } from './share-popup/share-popup.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { AppUserEffect } from './state/appUser.effect';
+import { appUserReducer } from './state/appUser.reducer';
 
 
 @NgModule({
@@ -51,6 +55,7 @@ import {MatChipsModule} from '@angular/material/chips';
     GradesPopupHelperComponent,
     GradeComponent,
     GradesMenuComponent,
+    SharePopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,9 +65,9 @@ import {MatChipsModule} from '@angular/material/chips';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({appUser : appUserReducer, folder : folderReducer, error : errorReducer}),
+    StoreModule.forRoot({authUser : authReducer, folder : folderReducer, error : errorReducer, appUser : appUserReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AppUserEffect, FolderEffect, GradeEffect]),
+    EffectsModule.forRoot([AuthEffect, FolderEffect, GradeEffect, AppUserEffect]),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -76,6 +81,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatToolbarModule,
     MatSnackBarModule,
     MatChipsModule,
+    MatRadioModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

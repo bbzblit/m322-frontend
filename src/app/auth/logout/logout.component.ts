@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppUser } from 'src/app/model/appuser.model';
-import { logout, tryReLogin } from 'src/app/state/appuser.action';
-import { selectAppUser } from 'src/app/state/appuser.selector';
+import { logout, tryReLogin } from 'src/app/state/auth.action';
+import { selectAuthUser } from 'src/app/state/auth.selector';
 
 @Component({
   selector: 'app-logout',
@@ -16,7 +16,7 @@ export class LogoutComponent implements OnInit {
   public isLogedIn :boolean = false;
   ngOnInit(): void {
     this.store.dispatch(tryReLogin());
-    this.store.select(selectAppUser).subscribe(me => this.isLogedIn = Object.keys(me).length !== 0);
+    this.store.select(selectAuthUser).subscribe(me => this.isLogedIn = Object.keys(me).length !== 0);
   }
 
   async initLogoutFlow(){

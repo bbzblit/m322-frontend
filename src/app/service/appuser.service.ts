@@ -33,4 +33,8 @@ export class AppuserService {
     window.location.replace("./login");
     return _req;
   }
+
+  getAppUser(emailOrUsername: string): Observable<AppUser> {
+    return this.http.get<AppUser>("/api/appuser/getid?identifier=" + emailOrUsername);
+  }
 }

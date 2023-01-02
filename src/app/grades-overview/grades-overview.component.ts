@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { Folder } from '../model/folder.model';
 import { Grade } from '../model/grade.model';
 import { SubjectModel } from '../model/subject.model';
+import { SharePopupComponent } from '../share-popup/share-popup.component';
 import { loadFolders, updateFolder } from '../state/folder.action';
 import { selectFolder, selectFolderById } from '../state/folder.selector';
 import { addGrade, deleteGrade } from '../state/grade.action';
@@ -135,7 +136,7 @@ export class GradesOverviewComponent implements OnInit {
     this.store.dispatch(deleteGrade({ gradeId: grade.id!, folderId: this.folder.id!, subjectId: this.folder.subjects?.at(this.selectedSubject)?.id! }));
     let caschedSubect = -1;
     caschedSubect = this.selectedSubject;
-    let snackBarRef = this._snackBar.open('Deleted Grade', 'Undo', { duration: 3000 });
+    let snackBarRef = this._snackBar.open('Deleted Grade', 'Undo', { duration: 5000 });
     snackBarRef.onAction().subscribe(() => this.createGrade(grade, this.folder.id!, this.folder.subjects?.at(caschedSubect)?.id!));
     this.selectedSubject = -1;
   }
@@ -156,7 +157,15 @@ export class GradesOverviewComponent implements OnInit {
       width: '30rem',
       height: '22rem',
       data: { type: 'viewGrade', grade: grade },
-    })
+    });
+  }
+
+  openShareDialog(){
+    const dialogRef = this.dialog.open(SharePopupComponent,{
+      width: '60%',
+      height: '55%',
+      data: {folder : this.folder},
+    });
   }
 
 }
