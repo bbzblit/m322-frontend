@@ -25,7 +25,7 @@
           </th>
           <td mat-cell *matCellDef="let element">
             <div class="access-wrapper">
-              <p *ngIf="!element.writeAccess" class="home-alt-text">Nicht freigegeben</p>
+              <p *ngIf="!element.viewAccess || !element.viewAccess.length" class="home-alt-text">Nicht freigegeben</p>
               <p *ngFor="let access of element.viewAccess">{{(access | appuserLookup | async)?.userName }}</p>
             </div>
           </td>
@@ -37,7 +37,7 @@
           </th>
           <td mat-cell *matCellDef="let element">
             <div class="access-wrapper">
-              <p *ngIf="!element.writeAccess" class="home-alt-text">Nicht freigegeben</p>
+              <p *ngIf="!element.writeAccess || !element.writeAccess.length" class="home-alt-text">Nicht freigegeben</p>
               <p *ngFor="let access of element.writeAccess">{{(access | appuserLookup | async)?.userName}}</p>
             </div>
           </td>

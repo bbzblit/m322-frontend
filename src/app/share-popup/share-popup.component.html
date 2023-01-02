@@ -4,17 +4,46 @@
     </button>
 </div>
 <div id="share-body">
-    <h1 style="font-size: large;">Managing access for folder <b>{{data.folder.title}}</b></h1>
+    <h1 style="font-size: large;">Managing access for folder <b >{{data.folder?.title}}</b></h1>
     <h1 style="font-size: medium; margin-top: 2rem;">Give access to an other user</h1>
     <form [formGroup]="shareForm" id="share-access-form">
-        <mat-form-field id="shared-email-input" >
+        <mat-form-field id="shared-email-input">
             <mat-label>Enter email or username</mat-label>
             <input formControlName="userNameOrEmail" required matInput placeholder="somebody@example.com">
         </mat-form-field>
         <mat-radio-group formControlName="readWrite" id="access-right-group" required>
-            <mat-radio-button value="write">Write access</mat-radio-button> <br/>
+            <mat-radio-button value="write">Write access</mat-radio-button> <br />
             <mat-radio-button value="read">Read access</mat-radio-button>
         </mat-radio-group>
         <button [disabled]="!shareForm.valid" (click)="initAccessFlow()" mat-stroked-button>Give access</button>
     </form>
+
+    <table style="width: 100%;" mat-table id="access-table" [dataSource]="haveAccess" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef> Username </th>
+            <td mat-cell *matCellDef="let element"> {{(element | appuserLookup | async)?.userName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{(element | appuserLookup | async)?.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="accessType">
+            <th mat-header-cell *matHeaderCellDef> Access Type </th>
+            <td mat-cell *matCellDef="let element"> {{data.folder.viewAccess.indexOf(element) == -1 ? "Write Access" :
+                "View Access"}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Remove Access </th>
+            <td mat-cell *matCellDef="let element"><button (click)="removeAccess(element)" mat-icon-button
+                    aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>close</mat-icon>
+                </button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 </div>
