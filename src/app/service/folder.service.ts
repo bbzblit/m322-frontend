@@ -1,17 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Folder } from '../model/folder.model';
+import { selectAppUserById } from '../state/appUser.selector';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FolderService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient, private store : Store) { }
 
   loadAllFolder(){
-    return this.http.get<Array<Folder>>("/api/folder");
+    let _result$ = this.http.get<Array<Folder>>("/api/folder");
+    return _result$
   }
 
   deleteFolder(folderId : string){

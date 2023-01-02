@@ -10,3 +10,8 @@ export const loadAppUserSuccess = createAction(
     '[Collection] loadet appuser success',
     props<AppUser>()
 )
+
+export const loadAppUsByUserId = createAction(
+    '[API] loading appuser by userid',
+    props<{userid : string}>()
+)

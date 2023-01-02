@@ -40,6 +40,7 @@ import { SharePopupComponent } from './share-popup/share-popup.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { AppUserEffect } from './state/appUser.effect';
 import { appUserReducer } from './state/appUser.reducer';
+import { AppuserLookupPipe } from './pipe/appuser-lookup.pipe';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { appUserReducer } from './state/appUser.reducer';
     GradeComponent,
     GradesMenuComponent,
     SharePopupComponent,
+    AppuserLookupPipe,
   ],
   imports: [
     BrowserModule,

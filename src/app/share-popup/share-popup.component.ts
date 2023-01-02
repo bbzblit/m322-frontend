@@ -21,41 +21,45 @@ import { updateFolder } from '../state/folder.action';
 export class SharePopupComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<SharePopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private store : Store) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private store: Store) { }
 
-  me? : AppUser  = undefined;
+  me?: AppUser = undefined;
 
   ngOnInit(): void {
     this.store.select(selectAuthUser).subscribe(me => this.me = me);
   }
 
-  addToFolder(appUser : AppUser, mode : string){
-    if(appUser.id == this.me?.id){
-      this.store.dispatch(addError({message : "You can't give yourself access"}));
-      return;
-    }
-    let folder = this.data.folder as Folder;
-    if(folder.viewAccess?.indexOf(appUser.id) == -1 || folder.writeAccess?.indexOf(appUser.id) == -1){
-      this.store.dispatch(addError({message : "This user does already have read or write access"}));
+  addToFolder(appUser: AppUser, mode: string) {
+    if (appUser.id == this.me?.id) {
+      this.store.dispatch(addError({ message: "You can't give yourself access" }));
       return;
     }
 
-    if(mode === "read"){
-      if(!folder.viewAccess){
-        folder.viewAccess = [];
-      }
-      folder.viewAccess = [... folder.viewAccess];
+    let folder = this.data.folder as Folder;
+
+    if (!folder.viewAccess) {
+      folder.viewAccess = [];
+    }
+    if (!folder.writeAccess) {
+      folder.writeAccess = [];
+    }
+
+    if (folder.viewAccess?.indexOf(appUser.id) != -1 || folder.writeAccess?.indexOf(appUser.id) != -1) {
+      this.store.dispatch(addError({ message: "This user does already have read or write access" }));
+      return;
+    }
+
+    if (mode === "read") {
+      folder.viewAccess = [...folder.viewAccess];
       folder.viewAccess.push(appUser.id);
-    } else{
-      if(!folder.writeAccess){
-        folder.writeAccess = [];
-      }
-      folder.writeAccess = [... folder.writeAccess];
+    } else {
+
+      folder.writeAccess = [...folder.writeAccess];
       folder.writeAccess.push(appUser.id);
     }
 
     this.store.dispatch(updateFolder(folder));
-    
+
 
     console.log(appUser);
   }
@@ -65,9 +69,9 @@ export class SharePopupComponent implements OnInit {
     readWrite: new FormControl("", [Validators.required]),
   });
 
-  initAccessFlow(){
+  initAccessFlow() {
     let form = this.shareForm.getRawValue();
-    this.store.select(selectAppUser).subscribe(appUsers => appUsers.forEach(appUser => {if(appUser.email == form.userNameOrEmail || appUser.userName == form.userNameOrEmail )this.addToFolder(appUser, form.readWrite!)}));
-    this.store.dispatch(loadAppUser({emailOrUsername : form.userNameOrEmail!}));
+    this.store.select(selectAppUser).subscribe(appUsers => appUsers.forEach(appUser => { if (appUser.email == form.userNameOrEmail || appUser.userName == form.userNameOrEmail) this.addToFolder(appUser, form.readWrite!) }));
+    this.store.dispatch(loadAppUser({ emailOrUsername: form.userNameOrEmail! }));
   }
 }

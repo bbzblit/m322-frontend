@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, of, switchMap } from "rxjs";
+import { catchError, map, of, mergeMap } from "rxjs";
 import { Exception } from "../model/exception.model";
 import { Folder } from "../model/folder.model";
 import { FolderService } from "../service/folder.service";
@@ -14,7 +14,7 @@ export class FolderEffect {
 
     loadFolders$ = createEffect(() => this.actions$.pipe(
         ofType(loadFolders),
-        switchMap(() =>
+        mergeMap(() =>
             this.folderService.loadAllFolder().pipe(
                 map((folders: Array<Folder>) => loadFolderSuccess({ folders: folders })),
                 catchError(error => of(addError(error.error as Exception)))
@@ -24,7 +24,7 @@ export class FolderEffect {
 
     deletFolder$ = createEffect(() => this.actions$.pipe(
         ofType(deletFolder),
-        switchMap(({ folderId }) =>
+        mergeMap(({ folderId }) =>
             this.folderService.deleteFolder(folderId).pipe(
                 map(() => deleteFolderSuccess({ folderId: folderId })),
                 catchError(error => of(addError(error.error as Exception)))
@@ -34,7 +34,7 @@ export class FolderEffect {
 
     createFolder$ = createEffect(() => this.actions$.pipe(
         ofType(createFolder),
-        switchMap((folder) =>
+        mergeMap((folder) =>
             this.folderService.createFolder(folder).pipe(
                 map((folder) => createFolderSuccess(folder)),
                 catchError(error => of(addError(error.error as Exception)))
@@ -44,7 +44,7 @@ export class FolderEffect {
 
     updateFolder$ = createEffect(() => this.actions$.pipe(
         ofType(updateFolder),
-        switchMap((folder) =>
+        mergeMap((folder) =>
             this.folderService.updateFolder(folder).pipe(
                 map((folder) => updateFolderSuccess(folder)),
                 catchError(error => of(addError(error.error as Exception)))

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { catchError, map, of, Subject, switchMap } from "rxjs";
+import { catchError, map, of, Subject, mergeMap } from "rxjs";
 import { AppUser } from "../model/appuser.model";
 import { Exception } from "../model/exception.model";
 import { Folder } from "../model/folder.model";
@@ -19,7 +19,7 @@ export class GradeEffect {
 
   addGrade$ = createEffect(() => this.actions$.pipe(
     ofType(addGrade),
-    switchMap(({grade, folderId, subjectId}) =>
+    mergeMap(({grade, folderId, subjectId}) =>
       this.gradeService.createGrade(grade, folderId, subjectId).pipe(
         map((subject: SubjectModel) => addGradeSuccess(subject)),
         catchError(error => of(addError(error.error as Exception)))
@@ -29,7 +29,7 @@ export class GradeEffect {
 
   deleteGrade$ = createEffect(() => this.actions$.pipe(
     ofType(deleteGrade),
-    switchMap(({gradeId, folderId, subjectId}) =>
+    mergeMap(({gradeId, folderId, subjectId}) =>
       this.gradeService.deleteGrade(gradeId, folderId, subjectId).pipe(
         map((subject: SubjectModel) => deleteGradeSuccess(subject)),
         catchError(error => of(addError(error.error as Exception)))

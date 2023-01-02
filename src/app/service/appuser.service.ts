@@ -37,4 +37,9 @@ export class AppuserService {
   getAppUser(emailOrUsername: string): Observable<AppUser> {
     return this.http.get<AppUser>("/api/appuser/getid?identifier=" + emailOrUsername);
   }
+
+  getAppUserById(id: string): Observable<AppUser> {
+    return this.http.get<AppUser>("/api/appuser?id=" + id);
+  }
+  
 }
