@@ -141,10 +141,11 @@ app-root{
 }
 #create-row{
     cursor: pointer;
-    height: 14%;
+    height: 12%;
     border: 2px dashed lightgray;
     display: flex;
     justify-content: center;
+    min-height: 12%;
     align-items: center;
 }
 #create-icon{

@@ -15,6 +15,7 @@ export class LogoutComponent implements OnInit {
 
   public isLogedIn :boolean = false;
   ngOnInit(): void {
+    this.store.dispatch(tryReLogin());
     this.store.select(selectAppUser).subscribe(me => this.isLogedIn = Object.keys(me).length !== 0);
   }
 

@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.store.dispatch(tryReLogin());
     this.store.dispatch(loadFolders());
     this.store.select(selectAppUser).subscribe(me => this.me = me);
     this.store.select(selectFolder).subscribe(folders => this.folder = folders);
