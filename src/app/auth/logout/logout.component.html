@@ -1,1 +1,4 @@
-<mat-icon *ngIf="isLogedIn" id="logout-icon" (click)="initLogoutFlow()" aria-hidden="false" aria-label="Example home icon" fontIcon="home">logout</mat-icon>
+<button (click)="initLogoutFlow()" mat-icon-button>
+    <mat-icon *ngIf="isLogedIn" id="logout-icon" aria-hidden="false" aria-label="Example home icon"
+        fontIcon="home">logout</mat-icon>
+</button>

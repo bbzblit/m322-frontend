@@ -50,9 +50,9 @@
           <td mat-cell *matCellDef="let element; let i = index">
             <div class="action-wrapper">
               <button class="action-button"
-                (click)="$event.stopPropagation();selectedRow = i;openEditDialog()"><mat-icon>edit</mat-icon></button>
+                (click)="$event.stopPropagation();selectedRow = i;openEditDialog()" mat-icon-button><mat-icon>edit</mat-icon></button>
               <button class="action-button"
-                (click)="$event.stopPropagation(); selectedRow = i;openDeleteDialog(i)"><mat-icon>delete</mat-icon></button>
+                (click)="$event.stopPropagation(); selectedRow = i;openDeleteDialog(i)" mat-icon-button><mat-icon>delete</mat-icon></button>
             </div>
           </td>
         </ng-container>
