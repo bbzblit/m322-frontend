@@ -40,7 +40,7 @@ export class GradesOverviewComponent implements OnInit {
   }
 
   finishFolderLoad(){
-    this.store.select(selectAuthUser).subscribe(me => {this.readOnlyAccess = this.folder.viewAccess?.indexOf(me.id) != -1});
+    this.store.select(selectAuthUser).subscribe(me => {this.readOnlyAccess = this.folder.viewAccess != undefined && this.folder.viewAccess?.indexOf(me.id) != -1;});
   }
 
   ngOnInit(): void {
