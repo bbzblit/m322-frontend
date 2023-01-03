@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   public selectedRow: number = -1;
   public menuPosition = { x: 0, y: 0 };
   public eventsSubject: Subject<void> = new Subject<void>();
-  public readAccessOnCurrentFolder : boolean = false;
+  public isNotOwner : boolean = false;
   constructor(private store: Store, public dialog: MatDialog) { }
 
 
@@ -36,13 +36,18 @@ export class HomeComponent implements OnInit {
     this.store.select(selectFolder).subscribe(folders => this.folder = folders);
   }
 
+
+  isOwner(index : number){
+    return this.folder.at(index)?.owner && this.folder.at(index)?.owner?.id == this.me.id;
+  }
+
   openContextMenu(_event: any, index: number) {
     let event = _event as PointerEvent;
     event.preventDefault();
-    this.readAccessOnCurrentFolder = false;
+    this.isNotOwner = false;
     this.selectedRow = index;
-    if(this.folder.at(index)?.viewAccess && this.folder.at(index)?.viewAccess?.indexOf(this.me.id) != -1){
-      this.readAccessOnCurrentFolder = true;
+    if(!this.isOwner(index)){
+      this.isNotOwner = true;
     }
     this.eventsSubject.next();
     this.menuPosition.x = event.clientX;

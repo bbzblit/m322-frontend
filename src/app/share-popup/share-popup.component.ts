@@ -46,6 +46,7 @@ export class SharePopupComponent implements OnInit {
     this.onlyViewAccess = this.owner.id != this.me?.id
     if(this.onlyViewAccess){
       this.shareForm.controls.userNameOrEmail.disable();
+      this.shareForm.controls.readWrite.disable();
     }
   }
 

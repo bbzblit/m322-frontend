@@ -9,9 +9,9 @@
     <form  [formGroup]="shareForm" id="share-access-form">
         <mat-form-field  id="shared-email-input">
             <mat-label>Enter email or username</mat-label>
-            <input [readonly]="onlyViewAccess" [disabled]="onlyViewAccess" formControlName="userNameOrEmail" matInput placeholder="somebody@example.com">
+            <input formControlName="userNameOrEmail" matInput placeholder="somebody@example.com">
         </mat-form-field>
-        <mat-radio-group [disabled]="onlyViewAccess" formControlName="readWrite" id="access-right-group" required>
+        <mat-radio-group formControlName="readWrite" id="access-right-group" required>
             <mat-radio-button value="write">Write access</mat-radio-button> <br />
             <mat-radio-button value="read">Read access</mat-radio-button>
         </mat-radio-group>
