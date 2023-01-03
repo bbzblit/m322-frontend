@@ -4,7 +4,7 @@
     </button>
 </div>
 <div id="share-body">
-    <h1 style="font-size: large;">Managing access for folder <b >{{data.folder?.title}}</b></h1>
+    <h1 style="font-size: large;">Managing access for folder <b>{{data.folder?.title}}</b></h1>
     <h1 style="font-size: medium; margin-top: 2rem;">Give access to an other user</h1>
     <form [formGroup]="shareForm" id="share-access-form">
         <mat-form-field id="shared-email-input">
@@ -18,32 +18,36 @@
         <button [disabled]="!shareForm.valid" (click)="initAccessFlow()" mat-stroked-button>Give access</button>
     </form>
 
-    <table style="width: 100%;" mat-table id="access-table" [dataSource]="haveAccess" class="mat-elevation-z8">
+    <div id="share-form-wrapper"> 
+        <table style="width: 100%;" mat-table id="access-table" [dataSource]="haveAccess" class="mat-elevation-z8">
 
-        <ng-container matColumnDef="username">
-            <th mat-header-cell *matHeaderCellDef> Username </th>
-            <td mat-cell *matCellDef="let element"> {{(element | appuserLookup | async)?.userName}} </td>
-        </ng-container>
-        <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> Email </th>
-            <td mat-cell *matCellDef="let element"> {{(element | appuserLookup | async)?.email}} </td>
-        </ng-container>
+            <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef> Username </th>
+                <td mat-cell *matCellDef="let element; let i = index"><div *ngIf="!i">{{data.folder?.owner.userName}}</div>  <div>{{(element | appuserLookup | async)?.userName}}</div> </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element; let i = index"><div *ngIf="!i">{{data.folder?.owner.email}}</div> {{(element | appuserLookup | async)?.email}} </td>
+            </ng-container>
 
-        <ng-container matColumnDef="accessType">
-            <th mat-header-cell *matHeaderCellDef> Access Type </th>
-            <td mat-cell *matCellDef="let element"> {{data.folder.viewAccess.indexOf(element) == -1 ? "Write Access" :
-                "View Access"}} </td>
-        </ng-container>
+            <ng-container matColumnDef="accessType">
+                <th mat-header-cell *matHeaderCellDef> Access Type </th>
 
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Remove Access </th>
-            <td mat-cell *matCellDef="let element"><button (click)="removeAccess(element)" mat-icon-button
-                    aria-label="Example icon button with a vertical three dot icon">
-                    <mat-icon>close</mat-icon>
-                </button></td>
-        </ng-container>
+                <td mat-cell *matCellDef="let element; let i = index"><div *ngIf="!i">Owner</div><div *ngIf="i">{{data.folder.viewAccess?.indexOf(element) == -1 ? "Write Access"
+                    :
+                    "View Access"}}</div> </td>
+            </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Remove Access </th>
+                <td mat-cell *matCellDef="let element; let i = index"><button [disabled]="!i" (click)="removeAccess(element)" mat-icon-button
+                        aria-label="Example icon button with a vertical three dot icon">
+                        <mat-icon>close</mat-icon>
+                    </button></td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
 </div>

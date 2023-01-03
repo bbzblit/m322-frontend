@@ -34,6 +34,7 @@ export class SharePopupComponent implements OnInit {
 
   updateAccessTypes() {
     this.haveAccess = [];
+    this.haveAccess.push(this.data.folder.owner.id);
     this.data.folder.viewAccess.forEach((uid: string) => this.haveAccess.push(uid));
     this.data.folder.writeAccess.forEach((uid: string) => this.haveAccess.push(uid));
 
@@ -85,19 +86,23 @@ export class SharePopupComponent implements OnInit {
 
   lazyLoad(appUsers: Array<AppUser>) {
     let form = this.shareForm.getRawValue();
-    let alreadyLoadet = false; appUsers.forEach(appUser => { if (appUser.email == form.userNameOrEmail || appUser.userName == form.userNameOrEmail) alreadyLoadet = true; }); if (!alreadyLoadet) this.store.dispatch(loadAppUser({ emailOrUsername: form.userNameOrEmail! }));
+    let alreadyLoadet = false; appUsers.forEach(appUser => { if (appUser.email == form.userNameOrEmail || appUser.userName == form.userNameOrEmail) alreadyLoadet = true; });
+    if (!alreadyLoadet)
+      this.store.dispatch(loadAppUser({ emailOrUsername: form.userNameOrEmail! }));
   }
 
   initAccessFlow() {
     let form = this.shareForm.getRawValue();
-    this.store.select(selectAppUser).subscribe(appUsers => { this.lazyLoad(appUsers); appUsers.forEach(appUser => { if (appUser.email == form.userNameOrEmail || appUser.userName == form.userNameOrEmail) this.addToFolder(appUser, form.readWrite!) }) });
+    this.store.select(selectAppUser).subscribe(appUsers => { this.lazyLoad(appUsers); appUsers.forEach(appUser => { if (appUser.email == form.userNameOrEmail || appUser.userName == form.userNameOrEmail) this.addToFolder(appUser, form.readWrite!); this.shareForm.reset(); }) });
 
   }
 
   removeAccess(uid: string) {
-    let origignalFolder = this.data.folder;
+    let origignalFolder = Object.assign({},this.data.folder);
     this.data.folder.writeAccess = this.data.folder.writeAccess.filter((elm: string) => elm !== uid);
     this.data.folder.viewAccess = this.data.folder.viewAccess.filter((elm: string) => elm !== uid);
-    this.store.dispatch(updateFolder(this.data.folder))
+    this.store.dispatch(updateFolder(this.data.folder));
+    let dialogRef = this._snackBar.open("Successful removed access from user", "Undo",{duration : 5000});
+    dialogRef.onAction().subscribe(() => this.store.dispatch(updateFolder(origignalFolder)));
   }
 }
