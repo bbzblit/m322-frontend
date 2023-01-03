@@ -26,7 +26,7 @@ export class SharePopupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, private store: Store, private _snackBar: MatSnackBar) { }
 
   me?: AppUser = undefined;
-
+  onlyViewAccess = false;
   displayedColumns: Array<string> = ['username', 'email', 'accessType', 'actions']
 
   owner: AppUser = this.data.folder.owner as AppUser;
@@ -37,12 +37,16 @@ export class SharePopupComponent implements OnInit {
     this.haveAccess.push(this.data.folder.owner.id);
     this.data.folder.viewAccess.forEach((uid: string) => this.haveAccess.push(uid));
     this.data.folder.writeAccess.forEach((uid: string) => this.haveAccess.push(uid));
-
   }
 
   ngOnInit(): void {
     this.store.select(selectAuthUser).subscribe(me => this.me = me);
     this.store.select(selectFolderById({ folderId: this.data.folder.id })).subscribe(folder => { this.data.folder = { ...folder }; this.updateAccessTypes() });
+    
+    this.onlyViewAccess = this.owner.id != this.me?.id
+    if(this.onlyViewAccess){
+      this.shareForm.controls.userNameOrEmail.disable();
+    }
   }
 
   addToFolder(appUser: AppUser, mode: string) {
@@ -79,21 +83,20 @@ export class SharePopupComponent implements OnInit {
   }
 
   shareForm = new FormGroup({
-    userNameOrEmail: new FormControl("", [Validators.required]),
+    userNameOrEmail: new FormControl("", []),
     readWrite: new FormControl("", [Validators.required]),
   });
 
 
-  lazyLoad(appUsers: Array<AppUser>) {
-    let form = this.shareForm.getRawValue();
-    let alreadyLoadet = false; appUsers.forEach(appUser => { if (appUser.email == form.userNameOrEmail || appUser.userName == form.userNameOrEmail) alreadyLoadet = true; });
+  lazyLoad(appUsers: Array<AppUser>, userNameOrEmail : string) {
+    let alreadyLoadet = false; appUsers.forEach(appUser => { if (appUser.email == userNameOrEmail || appUser.userName == userNameOrEmail) alreadyLoadet = true; });
     if (!alreadyLoadet)
-      this.store.dispatch(loadAppUser({ emailOrUsername: form.userNameOrEmail! }));
+      this.store.dispatch(loadAppUser({ emailOrUsername: userNameOrEmail }));
   }
 
   initAccessFlow() {
     let form = this.shareForm.getRawValue();
-    this.store.select(selectAppUser).subscribe(appUsers => { this.lazyLoad(appUsers); appUsers.forEach(appUser => { if (appUser.email == form.userNameOrEmail || appUser.userName == form.userNameOrEmail) this.addToFolder(appUser, form.readWrite!); this.shareForm.reset(); }) });
+    this.store.select(selectAppUser).subscribe(appUsers => { this.lazyLoad(appUsers, form.userNameOrEmail!); appUsers.forEach(appUser => { if (appUser.email == form.userNameOrEmail || appUser.userName == form.userNameOrEmail) this.addToFolder(appUser, form.readWrite!); this.shareForm.reset(); }) });
 
   }
 

@@ -4,10 +4,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, TitleStrategy } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
+import { AppUser } from '../model/appuser.model';
 import { Folder } from '../model/folder.model';
 import { Grade } from '../model/grade.model';
 import { SubjectModel } from '../model/subject.model';
 import { SharePopupComponent } from '../share-popup/share-popup.component';
+import { selectAuthUser } from '../state/auth.selector';
+import { addError } from '../state/error.action';
 import { loadFolders, updateFolder } from '../state/folder.action';
 import { selectFolder, selectFolderById } from '../state/folder.selector';
 import { addGrade, deleteGrade } from '../state/grade.action';
@@ -28,24 +31,31 @@ export class GradesOverviewComponent implements OnInit {
   public openEvent: Subject<void> = new Subject<void>();
   public selectedSubject: number = -1;
   public menuPosition = { x: 0, y: 0 };
-
   constructor(private route: ActivatedRoute, private store: Store, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
-
+  public readOnlyAccess = false;
   loader(folder: Array<Folder>) {
     if (folder.length === 0 && !this.loaded) {
       this.store.dispatch(loadFolders());
     }
   }
 
+  finishFolderLoad(){
+    this.store.select(selectAuthUser).subscribe(me => {this.readOnlyAccess = this.folder.viewAccess?.indexOf(me.id) != -1});
+  }
+
   ngOnInit(): void {
     this.store.select(selectFolder).subscribe(folder => this.loader(folder))
     this.folderId = this.route.snapshot.paramMap.get('id')!;
-    this.store.select(selectFolderById({ folderId: this.folderId })).subscribe(folder => { let _folder = { ...folder }; if (!_folder?.subjects) { _folder.subjects = [] }; this.folder = _folder; })
+    this.store.select(selectFolderById({ folderId: this.folderId })).subscribe(folder => { let _folder = { ...folder }; if (!_folder?.subjects) { _folder.subjects = [] }; this.folder = _folder; this.finishFolderLoad() })
   }
 
   openMenu(_event: any, index: number) {
     let event: PointerEvent = _event as PointerEvent;
     event.preventDefault();
+    if (this.readOnlyAccess) {
+      this.store.dispatch(addError({message : "You only have view access on this folder (" + this.  folder.title + ")"}));
+      return
+    }
     this.selectedSubject = index;
     this.menuPosition.x = event.clientX;
     this.menuPosition.y = event.clientY;
@@ -160,11 +170,11 @@ export class GradesOverviewComponent implements OnInit {
     });
   }
 
-  openShareDialog(){
-    const dialogRef = this.dialog.open(SharePopupComponent,{
+  openShareDialog() {
+    const dialogRef = this.dialog.open(SharePopupComponent, {
       width: '60%',
       height: '55%',
-      data: {folder : this.folder},
+      data: { folder: this.folder },
     });
   }
 

@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   public selectedRow: number = -1;
   public menuPosition = { x: 0, y: 0 };
   public eventsSubject: Subject<void> = new Subject<void>();
-
+  public readAccessOnCurrentFolder : boolean = false;
   constructor(private store: Store, public dialog: MatDialog) { }
 
 
@@ -39,7 +39,11 @@ export class HomeComponent implements OnInit {
   openContextMenu(_event: any, index: number) {
     let event = _event as PointerEvent;
     event.preventDefault();
+    this.readAccessOnCurrentFolder = false;
     this.selectedRow = index;
+    if(this.folder.at(index)?.viewAccess && this.folder.at(index)?.viewAccess?.indexOf(this.me.id) != -1){
+      this.readAccessOnCurrentFolder = true;
+    }
     this.eventsSubject.next();
     this.menuPosition.x = event.clientX;
     this.menuPosition.y = event.clientY;

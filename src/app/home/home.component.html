@@ -74,5 +74,5 @@
   </div>
 </div>
 <app-home-menu (edit)="openEditDialog()" (create)="openCreateDialog()" (delete)="openDeleteDialog(selectedRow)"
-  (close)="selectedRow = -1" [selectedFolder]="selectedRow >= 0" [open]="eventsSubject" id="home-menu"
+  (close)="selectedRow = -1" [selectedFolder]="selectedRow >= 0" [readAccessOnly]="readAccessOnCurrentFolder" [open]="eventsSubject" id="home-menu"
   [style.top]="menuPosition.y + 'px'" [style.left]="menuPosition.x + 'px'" style="position: absolute;"></app-home-menu>

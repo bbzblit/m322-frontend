@@ -11,7 +11,8 @@ export class HomeMenuComponent implements OnInit {
 
   @Input("selectedFolder") selectedFolder : boolean = false;
   @Input("open") open!: Observable<void>;
-  
+  @Input("readAccessOnly") readAccessOnly : boolean = false;
+
   @Output("close") closeEvent: EventEmitter<void> = new EventEmitter<void>();
 
   @Output("create") create : EventEmitter<void> = new EventEmitter<void>();

@@ -19,7 +19,7 @@
                 <th class="subject-table-head" mat-header-cell *matHeaderCellDef>
                     <p class="global-table-title">Grades</p>
                 </th>
-                <td mat-cell *matCellDef="let element; let i = index"><app-grade
+                <td mat-cell *matCellDef="let element; let i = index"><app-grade [readOnlyAccess]="readOnlyAccess"
                         (createNewGrade)="selectedSubject = i;openAddGradeDialog()"
                         (deleteGrade)="selectedSubject = i;deletGrade($event)" [grades]="element.grades"
                         (viewGrade)="openViewGradeDialog($event)"></app-grade></td>
@@ -46,10 +46,10 @@
                 </th>
                 <td mat-cell *matCellDef="let element; let i = index">
                     <div class="action-wrapper">
-                        <button class="action-button"
+                        <button [disabled]="readOnlyAccess" class="action-button"
                             (click)="$event.stopPropagation();selectedSubject = i;openEditDialog()"
                             mat-icon-button><mat-icon>edit</mat-icon></button>
-                        <button class="action-button"
+                        <button [disabled]="readOnlyAccess" class="action-button"
                             (click)="$event.stopPropagation(); selectedSubject = i;openDeleteDialog()"
                             mat-icon-button><mat-icon>delete</mat-icon></button>
                     </div>
@@ -62,7 +62,7 @@
                 [style.background-color]="i === selectedSubject ? 'rgb(237, 246, 246)' : null"
                 *matRowDef="let row; columns: displayedColumns; let i = index" (contextmenu)="openMenu($event, i)"></tr>
         </table>
-        <tr (contextmenu)="$event.preventDefault();openCreateDialog()" (click)="openCreateDialog()" id="create-row">
+        <tr (contextmenu)="$event.preventDefault();openCreateDialog()" *ngIf="!readOnlyAccess" (click)="openCreateDialog()" id="create-row">
             <mat-icon id="create-icon">add</mat-icon>
         </tr>
 
@@ -71,7 +71,7 @@
         </mat-paginator>
     </div>
 </div>
-<app-grade-menu (close)="selectedSubject = -1" (edit)="openEditDialog()" (create)="openCreateDialog()"
+<app-grade-menu  (close)="selectedSubject = -1" (edit)="openEditDialog()" (create)="openCreateDialog()"
     (addGrade)="openAddGradeDialog()" (delete)="openDeleteDialog()" [selectedFolder]="selectedSubject >= 0"
     [open]="openEvent" [style.top]="menuPosition.y + 'px'" [style.left]="menuPosition.x + 'px'"
     style="position: absolute;"></app-grade-menu>

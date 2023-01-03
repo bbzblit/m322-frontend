@@ -6,11 +6,11 @@
     <mat-icon>create_new_folder</mat-icon>
     <span>Create New</span>
   </button>
-  <button (click)="edit.emit()" *ngIf="selectedFolder" mat-menu-item>
+  <button  [disabled]="readAccessOnly" (click)="edit.emit()" *ngIf="selectedFolder" mat-menu-item>
     <mat-icon>edit</mat-icon>
     <span>Edit</span>
   </button>
-  <button (click)="deleteFolder.emit()" *ngIf="selectedFolder" mat-menu-item>
+  <button [disabled]="readAccessOnly" (click)="deleteFolder.emit()" *ngIf="selectedFolder" mat-menu-item>
     <mat-icon>delete_outline</mat-icon>
     <span>Delete</span>
   </button>

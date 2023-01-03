@@ -8,6 +8,7 @@ import { Grade } from 'src/app/model/grade.model';
 })
 export class GradeComponent implements OnInit {
 
+  @Input("readOnlyAccess") readOnlyAccess : boolean = false;
   @Input("grades") grades! : Array<Grade>;
   @Output("deleteGrade") deleteGrade : EventEmitter<Grade> = new EventEmitter<Grade>();
   @Output("createNewGrade") createNewGrade : EventEmitter<void> = new EventEmitter<void>();
