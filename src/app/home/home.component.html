@@ -73,6 +73,6 @@
     </mat-paginator>
   </div>
 </div>
-<app-home-menu (edit)="openEditDialog()" (create)="openCreateDialog()" (delete)="openDeleteDialog(selectedRow)"
+<app-home-menu (share)="openShareDialog()" (edit)="openEditDialog()" (create)="openCreateDialog()" (delete)="openDeleteDialog(selectedRow)"
   (close)="selectedRow = -1" [selectedFolder]="selectedRow >= 0" [readAccessOnly]="isNotOwner" [open]="eventsSubject" id="home-menu"
   [style.top]="menuPosition.y + 'px'" [style.left]="menuPosition.x + 'px'" style="position: absolute;"></app-home-menu>

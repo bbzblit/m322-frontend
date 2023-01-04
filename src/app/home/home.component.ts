@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { AppUser } from '../model/appuser.model';
 import { Folder } from '../model/folder.model';
 import { AppuserService } from '../service/appuser.service';
+import { SharePopupComponent } from '../share-popup/share-popup.component';
 import { register, tryReLogin } from '../state/auth.action';
 import { selectAuthUser } from '../state/auth.selector';
 import { createFolder, deletFolder, loadFolders, updateFolder } from '../state/folder.action';
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
   public selectedRow: number = -1;
   public menuPosition = { x: 0, y: 0 };
   public eventsSubject: Subject<void> = new Subject<void>();
-  public isNotOwner : boolean = false;
+  public isNotOwner: boolean = false;
   constructor(private store: Store, public dialog: MatDialog) { }
 
 
@@ -37,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  isOwner(index : number){
+  isOwner(index: number) {
     return this.folder.at(index)?.owner && this.folder.at(index)?.owner?.id == this.me.id;
   }
 
@@ -46,7 +47,7 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
     this.isNotOwner = false;
     this.selectedRow = index;
-    if(!this.isOwner(index)){
+    if (!this.isOwner(index)) {
       this.isNotOwner = true;
     }
     this.eventsSubject.next();
@@ -74,7 +75,7 @@ export class HomeComponent implements OnInit {
     if (!folder) { return; }
     this.store.dispatch(createFolder(folder));
   }
-  
+
   openCreateDialog() {
     const dialogRef = this.dialog.open(HomePopupHelperComponent, {
       width: '24rem',
@@ -105,4 +106,13 @@ export class HomeComponent implements OnInit {
     let _folder = this.folder[index]
     window.location.replace("./edit/" + _folder.id);
   }
+
+  openShareDialog() {
+    const dialogRef = this.dialog.open(SharePopupComponent, {
+      width: '60%',
+      height: '55%',
+      data: { folder: this.folder.at(this.selectedRow) },
+    });
+  }
+
 }
