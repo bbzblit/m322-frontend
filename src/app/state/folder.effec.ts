@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, of, mergeMap } from "rxjs";
-import { Exception } from "../model/exception.model";
+import { Message } from "../model/exception.model";
 import { Folder } from "../model/folder.model";
 import { FolderService } from "../service/folder.service";
-import { addError } from "./error.action";
+import { addError } from "./message.action";
 import { createFolder, createFolderSuccess, deleteFolderSuccess, deletFolder, loadFolders, loadFolderSuccess, updateFolder, updateFolderSuccess } from "./folder.action";
 
 @Injectable()
@@ -17,7 +17,7 @@ export class FolderEffect {
         mergeMap(() =>
             this.folderService.loadAllFolder().pipe(
                 map((folders: Array<Folder>) => loadFolderSuccess({ folders: folders })),
-                catchError(error => of(addError(error.error as Exception)))
+                catchError(error => of(addError(error.error as Message)))
             )
         )
     ))
@@ -27,7 +27,7 @@ export class FolderEffect {
         mergeMap(({ folderId }) =>
             this.folderService.deleteFolder(folderId).pipe(
                 map(() => deleteFolderSuccess({ folderId: folderId })),
-                catchError(error => of(addError(error.error as Exception)))
+                catchError(error => of(addError(error.error as Message)))
             )
         )
     ))
@@ -37,7 +37,7 @@ export class FolderEffect {
         mergeMap((folder) =>
             this.folderService.createFolder(folder).pipe(
                 map((folder) => createFolderSuccess(folder)),
-                catchError(error => of(addError(error.error as Exception)))
+                catchError(error => of(addError(error.error as Message)))
             )
         )
     ))
@@ -47,7 +47,7 @@ export class FolderEffect {
         mergeMap((folder) =>
             this.folderService.updateFolder(folder).pipe(
                 map((folder) => updateFolderSuccess(folder)),
-                catchError(error => of(addError(error.error as Exception)))
+                catchError(error => of(addError(error.error as Message)))
             )
         )
     ))

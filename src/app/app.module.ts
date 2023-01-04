@@ -32,7 +32,6 @@ import { GradesOverviewComponent } from './grades-overview/grades-overview.compo
 import { GradesPopupHelperComponent } from './grades-overview/grades-popup-helper/grades-popup-helper.component';
 import { GradeComponent } from './grades-overview/grade/grade.component'; 
 import { GradesMenuComponent } from './grades-overview/grade-menu/grade-menu.component';
-import { errorReducer } from './state/error.reducer';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { GradeEffect } from './state/grade.effect';
 import {MatChipsModule} from '@angular/material/chips';
@@ -41,6 +40,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { AppUserEffect } from './state/appUser.effect';
 import { appUserReducer } from './state/appUser.reducer';
 import { AppuserLookupPipe } from './pipe/appuser-lookup.pipe';
+import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
+import { messageReducer } from './state/message.reducer';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { AppuserLookupPipe } from './pipe/appuser-lookup.pipe';
     GradesMenuComponent,
     SharePopupComponent,
     AppuserLookupPipe,
+    PasswordResetComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,7 @@ import { AppuserLookupPipe } from './pipe/appuser-lookup.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({authUser : authReducer, folder : folderReducer, error : errorReducer, appUser : appUserReducer}),
+    StoreModule.forRoot({authUser : authReducer, folder : folderReducer, message : messageReducer, appUser : appUserReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AuthEffect, FolderEffect, GradeEffect, AppUserEffect]),
     BrowserAnimationsModule,

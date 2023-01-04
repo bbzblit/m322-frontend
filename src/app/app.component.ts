@@ -2,12 +2,12 @@ import { Component, HostListener } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Exception } from './model/exception.model';
+import { Message } from './model/exception.model';
 import { loadAppUsByUserId, loadAppUser } from './state/appUser.action';
 import { selectAppUserById } from './state/appUser.selector';
-import { deleteFirstError } from './state/error.action';
-import { selectError } from './state/error.selector';
+import { deleteFirstError } from './state/message.action';
 import { selectFolder } from './state/folder.selector';
+import { selectMessage } from './state/message.selector';
 
 @Component({
   selector: 'app-root',
@@ -29,11 +29,11 @@ export class AppComponent {
   }
 
   constructor(private _snackBar: MatSnackBar, private store: Store, private router : Router) {
-    this.store.select(selectError).subscribe(errors => { if (errors && errors.length > 0) { this.openSnackBar(errors.at(0)) } })
+    this.store.select(selectMessage).subscribe(errors => { if (errors && errors.length > 0) { this.openSnackBar(errors.at(0)) } })
     this.store.select(selectFolder).subscribe(folders => folders.forEach(folder => {folder.viewAccess?.forEach(uid => this.legacyLoad(uid)); folder.writeAccess?.forEach(uid => this.legacyLoad(uid))}))
   }
 
-  openSnackBar(exception: Exception | undefined) {
+  openSnackBar(exception: Message | undefined) {
     if (!exception) {
       return;
     }

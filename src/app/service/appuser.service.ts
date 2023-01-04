@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppUser } from '../model/appuser.model';
 import { LoginModel } from '../model/login.model';
-import { addError } from '../state/error.action';
+import { addError } from '../state/message.action';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,10 @@ export class AppuserService {
 
   getAppUserById(id: string): Observable<AppUser> {
     return this.http.get<AppUser>("/api/appuser?id=" + id);
+  }
+
+  sendResetLink(email : string) : Observable<void>{
+    return this.http.post<void>("/api/appuser/passwortreset/initflow?email=" + email, {});
   }
   
 }

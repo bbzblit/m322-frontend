@@ -11,7 +11,7 @@ import { loadAppUsByUserId, loadAppUser } from '../state/appUser.action';
 import { selectAppUser } from '../state/appUser.selector';
 import { authReducer } from '../state/auth.reducer';
 import { selectAuthUser } from '../state/auth.selector';
-import { addError } from '../state/error.action';
+import { addError } from '../state/message.action';
 import { updateFolder } from '../state/folder.action';
 import { selectFolderById } from '../state/folder.selector';
 

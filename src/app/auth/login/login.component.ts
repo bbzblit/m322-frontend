@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AppUser } from 'src/app/model/appuser.model';
 import { LoginModel } from 'src/app/model/login.model';
 import { login } from 'src/app/state/auth.action';
 import { selectAuthUser } from 'src/app/state/auth.selector';
+import { PasswordResetComponent } from '../password-reset/password-reset.component';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   passwordHide: boolean = true;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private dialog : MatDialog) { }
 
   private getCookie(name: string) {
     var cookieArr = document.cookie.split(";");
@@ -43,4 +45,13 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(login(_data));
   }
 
+  openPasswordResetDialog(){
+    const dialogRef = this.dialog.open(
+      PasswordResetComponent, {
+        width: '35rem',
+        height: '20rem',
+      }
+    );
+
+  }
 }

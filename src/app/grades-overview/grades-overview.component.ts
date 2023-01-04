@@ -10,7 +10,7 @@ import { Grade } from '../model/grade.model';
 import { SubjectModel } from '../model/subject.model';
 import { SharePopupComponent } from '../share-popup/share-popup.component';
 import { selectAuthUser } from '../state/auth.selector';
-import { addError } from '../state/error.action';
+import { addError } from '../state/message.action';
 import { loadFolders, updateFolder } from '../state/folder.action';
 import { selectFolder, selectFolderById } from '../state/folder.selector';
 import { addGrade, deleteGrade } from '../state/grade.action';

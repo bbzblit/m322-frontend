@@ -16,6 +16,7 @@
                 <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
+        <a class="direct-link" (click)="openPasswordResetDialog()">Forgot your password?</a>
 
         <button [disabled]="!loginForm.valid" mat-stroked-button color="primary">Login</button>
         <a class="direct-link" routerLink="../sing-up">Or create an account</a>

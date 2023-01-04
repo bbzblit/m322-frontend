@@ -3,12 +3,12 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { catchError, map, of, mergeMap } from "rxjs";
 import { AppUser } from "../model/appuser.model";
-import { Exception } from "../model/exception.model";
+import { Message } from "../model/exception.model";
 import { LoginModel } from "../model/login.model";
 import { AppuserService } from "../service/appuser.service";
-import { loadAppUsByUserId, loadAppUser, loadAppUserSuccess } from "./appUser.action";
+import { loadAppUsByUserId, loadAppUser, loadAppUserSuccess, sendResetLink } from "./appUser.action";
 import { login, loginSuccess, logout, logoutSuccess, register, registerSuccess, tryReLogin } from "./auth.action";
-import { addError } from "./error.action";
+import { addError, addSuccess } from "./message.action";
 
 @Injectable()
 export class AppUserEffect {
@@ -19,7 +19,7 @@ export class AppUserEffect {
     mergeMap(({emailOrUsername}) =>
       this.appUserService.getAppUser(emailOrUsername).pipe(
         map((appUser: AppUser) => loadAppUserSuccess(appUser)),
-        catchError(error => of(addError(error.error as Exception)))
+        catchError(error => of(addError(error.error as Message)))
       )
     )
   ))
@@ -29,10 +29,19 @@ export class AppUserEffect {
     mergeMap(({userid}) =>
       this.appUserService.getAppUserById(userid).pipe(
         map((appUser: AppUser) => loadAppUserSuccess(appUser)),
-        catchError(error => of(addError(error.error as Exception)))
+        catchError(error => of(addError(error.error as Message)))
       )
     )
   ))
 
+  sendEmail$ = createEffect(() => this.actions$.pipe(
+    ofType(sendResetLink),
+    mergeMap(({email}) =>
+      this.appUserService.sendResetLink(email).pipe(
+        map(() => addSuccess({message : "Send reset link to your email"}) ),
+        catchError(error => of(addError(error.error as Message)))
+      )
+    )
+  ))
 
 }

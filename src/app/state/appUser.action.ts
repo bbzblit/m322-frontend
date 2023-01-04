@@ -15,3 +15,8 @@ export const loadAppUsByUserId = createAction(
     '[API] loading appuser by userid',
     props<{userid : string}>()
 )
+
+export const sendResetLink = createAction(
+    '[API] sending reset link',
+    props<{email : string}>()
+)

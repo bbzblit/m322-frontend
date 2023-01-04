@@ -1,6 +1,6 @@
 
 
-export interface Exception{
+export interface Message{
     error? : string,
     message?: string,
     path?: string,
