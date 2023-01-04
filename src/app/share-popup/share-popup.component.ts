@@ -35,8 +35,8 @@ export class SharePopupComponent implements OnInit {
   updateAccessTypes() {
     this.haveAccess = [];
     this.haveAccess.push(this.data.folder.owner.id);
-    this.data.folder.viewAccess.forEach((uid: string) => this.haveAccess.push(uid));
-    this.data.folder.writeAccess.forEach((uid: string) => this.haveAccess.push(uid));
+    this.data.folder.viewAccess?.forEach((uid: string) => this.haveAccess.push(uid));
+    this.data.folder.writeAccess?.forEach((uid: string) => this.haveAccess.push(uid));
   }
 
   ngOnInit(): void {
