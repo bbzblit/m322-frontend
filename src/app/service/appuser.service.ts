@@ -45,5 +45,9 @@ export class AppuserService {
   sendResetLink(email : string) : Observable<void>{
     return this.http.post<void>("/api/appuser/passwortreset/initflow?email=" + email, {});
   }
+
+  resetPassword(data : any){
+    return this.http.post<AppUser>("/api/appser/passwortreset", data);
+  }
   
 }

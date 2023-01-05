@@ -20,3 +20,8 @@ export const sendResetLink = createAction(
     '[API] sending reset link',
     props<{email : string}>()
 )
+
+export const resetPassword = createAction(
+    '[API] reseting Password',
+    props<{email  : string | null, otp : string | null, password : string | null}>()
+)

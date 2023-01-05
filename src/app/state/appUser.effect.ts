@@ -6,7 +6,7 @@ import { AppUser } from "../model/appuser.model";
 import { Message } from "../model/exception.model";
 import { LoginModel } from "../model/login.model";
 import { AppuserService } from "../service/appuser.service";
-import { loadAppUsByUserId, loadAppUser, loadAppUserSuccess, sendResetLink } from "./appUser.action";
+import { loadAppUsByUserId, loadAppUser, loadAppUserSuccess, resetPassword, sendResetLink } from "./appUser.action";
 import { login, loginSuccess, logout, logoutSuccess, register, registerSuccess, tryReLogin } from "./auth.action";
 import { addError, addSuccess } from "./message.action";
 
@@ -44,4 +44,13 @@ export class AppUserEffect {
     )
   ))
 
+  resetPassword$ = createEffect(() => this.actions$.pipe(
+    ofType(resetPassword),
+    mergeMap((data) =>
+      this.appUserService.resetPassword(data).pipe(
+        map((appUser : AppUser) => loadAppUserSuccess(appUser) ),
+        catchError(error => of(addError(error.error as Message)))
+      )
+    )
+  ))
 }

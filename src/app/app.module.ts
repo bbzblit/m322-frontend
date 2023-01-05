@@ -42,6 +42,7 @@ import { appUserReducer } from './state/appUser.reducer';
 import { AppuserLookupPipe } from './pipe/appuser-lookup.pipe';
 import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
 import { messageReducer } from './state/message.reducer';
+import { PasswordResetConfirmComponent } from './auth/password-reset-confirm/password-reset-confirm.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { messageReducer } from './state/message.reducer';
     SharePopupComponent,
     AppuserLookupPipe,
     PasswordResetComponent,
+    PasswordResetConfirmComponent,
   ],
   imports: [
     BrowserModule,
