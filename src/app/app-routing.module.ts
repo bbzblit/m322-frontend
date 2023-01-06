@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'sing-up', component: SingUpComponent },
   { path: 'home', component: HomeComponent},
   { path : 'edit/:id', component : GradesOverviewComponent},
-  { path : 'reset/:id', component : PasswordResetConfirmComponent},
+  { path : 'reset/:otp', component : PasswordResetConfirmComponent},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

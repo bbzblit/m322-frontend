@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, USER_RUNTIME_CHECKS } from '@ngrx/store';
 import { resetPassword } from 'src/app/state/appUser.action';
 
 @Component({
@@ -12,7 +12,6 @@ import { resetPassword } from 'src/app/state/appUser.action';
 export class PasswordResetConfirmComponent implements OnInit {
 
   resetPasswordForm = new FormGroup({
-    email : new FormControl("", [Validators.email, Validators.required]),
     password: new FormControl("", [Validators.required, Validators.minLength(8)]),
     
   });
@@ -26,6 +25,7 @@ export class PasswordResetConfirmComponent implements OnInit {
 
   initReset(){
     this.store.dispatch(resetPassword({...this.resetPasswordForm.getRawValue(), otp : this.route.snapshot.paramMap.get("otp")}))
+    this.resetPasswordForm.reset();
   }
 
 }
