@@ -48,7 +48,7 @@ export class AppUserEffect {
     ofType(resetPassword),
     mergeMap((data) =>
       this.appUserService.resetPassword(data).pipe(
-        map((appUser : AppUser) => loadAppUserSuccess(appUser) ),
+        map((appUser : AppUser) => registerSuccess(appUser) ),
         catchError(error => of(addError(error.error as Message)))
       )
     )

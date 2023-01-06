@@ -7,7 +7,7 @@
     <h1 style="font-size: large;">Managing access for folder <b>{{data.folder?.title}}</b></h1>
     <h1 style="font-size: medium; margin-top: 2rem;">Give access to an other user</h1>
     <form  [formGroup]="shareForm" id="share-access-form">
-        <mat-form-field  id="shared-email-input">
+        <mat-form-field appearance="fill" id="shared-email-input">
             <mat-label>Enter email or username</mat-label>
             <input formControlName="userNameOrEmail" matInput placeholder="somebody@example.com">
         </mat-form-field>

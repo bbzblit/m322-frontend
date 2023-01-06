@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store, USER_RUNTIME_CHECKS } from '@ngrx/store';
 import { resetPassword } from 'src/app/state/appUser.action';
+import { selectAuthUser } from 'src/app/state/auth.selector';
 
 @Component({
   selector: 'app-password-reset-confirm',
@@ -12,8 +13,8 @@ import { resetPassword } from 'src/app/state/appUser.action';
 export class PasswordResetConfirmComponent implements OnInit {
 
   resetPasswordForm = new FormGroup({
-    password: new FormControl("", [Validators.required, Validators.minLength(8)]),
-    
+    password: new FormControl("", [Validators.required]),
+    retypePassword : new FormControl("", [Validators.required])
   });
 
   public passwordHide : boolean = true;
@@ -21,10 +22,13 @@ export class PasswordResetConfirmComponent implements OnInit {
   constructor(private route: ActivatedRoute, private store : Store) { }
 
   ngOnInit(): void {
+    this.store.select(selectAuthUser).subscribe(appUser => {
+      if(Object.keys(appUser).length !== 0){window.location.replace("./login");}
+   });
   }
 
   initReset(){
-    this.store.dispatch(resetPassword({...this.resetPasswordForm.getRawValue(), otp : this.route.snapshot.paramMap.get("otp")}))
+    this.store.dispatch(resetPassword({ password : this.resetPasswordForm.getRawValue().password , otp : this.route.snapshot.paramMap.get("otp")}))
     this.resetPasswordForm.reset();
   }
 
