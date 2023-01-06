@@ -47,7 +47,7 @@ export class AppuserService {
   }
 
   resetPassword(data : any){
-    return this.http.post<AppUser>("/api/appser/passwortreset", data);
+    return this.http.post<AppUser>("/api/appuser/passwortreset", data);
   }
   
 }
