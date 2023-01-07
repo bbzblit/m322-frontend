@@ -1,9 +1,12 @@
-FROM node:12 as build-stage
+FROM node:18 as build-stage
+
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
 COPY . .
+RUN npm install
 RUN npm run build
 
 FROM nginx:1.17
-COPY --from=build-stage /app/dist/ /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN rm /usr/share/nginx/html/50x.html /usr/share/nginx/html/index.html
+COPY --from=build-stage /app/dist/grades-application-m120/ /usr/share/nginx/html

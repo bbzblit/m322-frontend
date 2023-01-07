@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path : 'edit/:id', component : GradesOverviewComponent},
   { path : 'reset/:otp', component : PasswordResetConfirmComponent},
+  { path : "", redirectTo : "/login"},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
