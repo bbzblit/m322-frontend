@@ -9,10 +9,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build Docker Image
       run: |
-        docker build -t my-image .
+        docker build -t m322-frontend:latest .
     - name: Login to GitHub Packages
       run: |
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u "${{ github.actor }}" --password-stdin
     - name: Push Docker Image
       run: |
-        docker push docker.pkg.github.com/bbzblit/m322-frontend/my-image:latest
+        docker push docker.pkg.github.com/bbzblit/m322-frontend/m322-frontend:latest
