@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag m322-frontend:$(date +%s) --tag m322-frontend:latest
+      run: docker build . --file Dockerfile --tag m322-frontend:latest
