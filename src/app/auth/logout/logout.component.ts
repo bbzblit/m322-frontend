@@ -16,7 +16,7 @@ export class LogoutComponent implements OnInit {
 
   public isLogedIn :boolean = false;
   
-  private nonLoginSites : Array<string> = ['/login', "/sing-up", "/", ""];
+  private nonLoginSites : Array<string> = ['/login', "/sing-up", "/", "", "/impressum", "/privacy", "/support"];
 
   private noLoginSitesPrefix : Array<string> = ['/reset'];
 

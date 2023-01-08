@@ -29,8 +29,6 @@ export class HomeComponent implements OnInit {
   public isNotOwner: boolean = false;
   constructor(private store: Store, public dialog: MatDialog) { }
 
-
-
   ngOnInit(): void {
     this.store.dispatch(loadFolders());
     this.store.select(selectAuthUser).subscribe(me => this.me = me);
