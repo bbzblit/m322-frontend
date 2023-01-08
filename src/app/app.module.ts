@@ -43,6 +43,9 @@ import { AppuserLookupPipe } from './pipe/appuser-lookup.pipe';
 import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
 import { messageReducer } from './state/message.reducer';
 import { PasswordResetConfirmComponent } from './auth/password-reset-confirm/password-reset-confirm.component';
+import { SupportComponent } from './static/support/support.component';
+import { PrivacyComponent } from './static/privacy/privacy.component';
+import { ImpressumComponent } from './static/impressum/impressum.component';
 
 
 @NgModule({
@@ -62,6 +65,9 @@ import { PasswordResetConfirmComponent } from './auth/password-reset-confirm/pas
     AppuserLookupPipe,
     PasswordResetComponent,
     PasswordResetConfirmComponent,
+    SupportComponent,
+    PrivacyComponent,
+    ImpressumComponent,
   ],
   imports: [
     BrowserModule,

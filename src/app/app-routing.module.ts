@@ -5,6 +5,9 @@ import { PasswordResetConfirmComponent } from './auth/password-reset-confirm/pas
 import { SingUpComponent } from './auth/sing-up/sing-up.component';
 import { GradesOverviewComponent } from './grades-overview/grades-overview.component';
 import { HomeComponent } from './home/home.component';
+import { ImpressumComponent } from './static/impressum/impressum.component';
+import { PrivacyComponent } from './static/privacy/privacy.component';
+import { SupportComponent } from './static/support/support.component';
 
 const routes: Routes = [
   { path: 'login', pathMatch : "full", component: LoginComponent },
@@ -13,6 +16,9 @@ const routes: Routes = [
   { path : 'edit/:id', pathMatch : "full", component : GradesOverviewComponent},
   { path : 'reset/:otp', pathMatch : "full", component : PasswordResetConfirmComponent},
   { path : "", pathMatch : "full", redirectTo : "/login"},
+  { path : "support", component : SupportComponent},
+  { path : "privacy", component : PrivacyComponent },
+  { path : "impressum", component : ImpressumComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
