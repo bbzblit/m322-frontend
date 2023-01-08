@@ -7,12 +7,12 @@ import { GradesOverviewComponent } from './grades-overview/grades-overview.compo
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'sing-up', component: SingUpComponent },
-  { path: 'home', component: HomeComponent},
-  { path : 'edit/:id', component : GradesOverviewComponent},
-  { path : 'reset/:otp', component : PasswordResetConfirmComponent},
-  { path : "", redirectTo : "/login"},
+  { path: 'login', pathMatch : "full", component: LoginComponent },
+  { path: 'sing-up', pathMatch : "full", component: SingUpComponent },
+  { path: 'home', pathMatch : "full", component: HomeComponent},
+  { path : 'edit/:id', pathMatch : "full", component : GradesOverviewComponent},
+  { path : 'reset/:otp', pathMatch : "full", component : PasswordResetConfirmComponent},
+  { path : "", pathMatch : "full", redirectTo : "/login"},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

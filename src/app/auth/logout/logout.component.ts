@@ -16,12 +16,12 @@ export class LogoutComponent implements OnInit {
 
   public isLogedIn :boolean = false;
   
-  private nonLoginSites : Array<string> = ['/login', "/sing-up", "/"];
+  private nonLoginSites : Array<string> = ['/login', "/sing-up", "/", ""];
 
   private noLoginSitesPrefix : Array<string> = ['/reset'];
 
   ngOnInit(): void {
-    let path =  "/" + window.location.href.replace (/^[a-z]{4,5}\:\/{2}[a-z]{1,}\:[0-9]{1,4}.(.*)/, '$1');
+    let path = window.location.href.replace (/^[a-z]{4,5}\:\/{2}[^/]+/, '');
     let prefixMatch = false;
     this.noLoginSitesPrefix.forEach(prefix => {if(path.startsWith(prefix)) prefixMatch = true;})
 
