@@ -194,26 +194,6 @@ app-root{
     background-color: rgba(222, 218, 218, 0.752) !important;
 }
 
-
-@media screen and (min-width: 600px){
-    .pc-view{
-        display: block;
-    }
-    .mobile-view{
-        display: none !important;
-    }
-}
-
-
-@media screen and (max-width: 600px){
-    .pc-view{
-        display: none;
-    }
-    .mobile-view{
-        display: block;
-    }
-}
-
 .center{
     height: 100%;
     width: 100%;

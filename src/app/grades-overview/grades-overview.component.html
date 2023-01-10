@@ -6,7 +6,7 @@
         </button>
     </div>
     <div class="mat-elevation-z8" id="form-wrapper"
-        style="height: 70%; position: relative; display: flex; flex-direction: column;">
+        style="height: 70%; position: relative; display: flex; flex-direction: column;overflow-y: auto;">
         <table class="grades-table" mat-table [dataSource]="folder.subjects!">
             <ng-container matColumnDef="name">
                 <th class="subject-table-head" mat-header-cell *matHeaderCellDef>

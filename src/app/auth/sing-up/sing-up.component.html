@@ -28,7 +28,7 @@
             <mat-label>Password</mat-label>
             <input formControlName="password" ngDefaultControl [type]="passwordHide ? 'password' : 'text'" matInput
                 placeholder="Your Password">
-            <button class="passwordhide" mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
+            <button class="passwordhide" mat-icon-button matSuffix (click)="$event.preventDefault();passwordHide = !passwordHide"
                 [attr.aria-pressed]="passwordHide">
                 <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -40,7 +40,7 @@
             <input #retypePassword ngDefaultControl required [type]="retypePasswrdHide ? 'password' : 'text'" matInput
                 placeholder="Your Password">
 
-            <button class="passwordhide" mat-icon-button matSuffix (click)="retypePasswrdHide = !retypePasswrdHide"
+            <button class="passwordhide" mat-icon-button matSuffix (click)="$event.preventDefault();retypePasswrdHide = !retypePasswrdHide"
                 [attr.aria-pressed]="retypePasswrdHide">
                 <mat-icon>{{retypePasswrdHide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>

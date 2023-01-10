@@ -1,7 +1,7 @@
 <div id="home-wrapper">
   <h1 id="home-title">Welcome back {{me.userName}}</h1>
   <div id="home-table-wrapper" class="mat-elevation-z8">
-    <div style="height: 100%; position: relative; display: flex; flex-direction: column;">
+    <div style="height: 100%; position: relative; display: flex; flex-direction: column; overflow-y: auto;">
       <table id="home-table" mat-table [dataSource]="folder">
 
         <ng-container matColumnDef="title">
@@ -63,9 +63,10 @@
           (contextmenu)="openContextMenu($event, i)" *matRowDef="let row;let i = index; columns: displayedColumns;"
            class="home-table-row">
         </tr>
+        
       </table>
       <tr (contextmenu)="$event.preventDefault();openCreateDialog()" (click)="openCreateDialog()" id="create-row"><mat-icon
-          id="create-icon">add</mat-icon></tr>
+        id="create-icon">add</mat-icon></tr>
       <div style="height: 100%;" (contextmenu)="openContextMenu($event, -1)"></div>
     </div>
     <mat-paginator id="paginator-options" pageSize="15" showFirstLastButtons
