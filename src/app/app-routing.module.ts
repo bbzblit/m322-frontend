@@ -16,7 +16,7 @@ const routes: Routes = [
   { path : 'edit/:id', pathMatch : "full", component : GradesOverviewComponent},
   { path : 'reset/:otp', pathMatch : "full", component : PasswordResetConfirmComponent},
   { path : "", pathMatch : "full", redirectTo : "/login"},
-  { path : "support", component : SupportComponent},
+  { path : "support-us", component : SupportComponent},
   { path : "privacy", component : PrivacyComponent },
   { path : "impressum", component : ImpressumComponent },
 ];
